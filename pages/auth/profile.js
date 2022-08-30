@@ -15,8 +15,10 @@ export default function Profile() {
         const form = new FormData(e.target)
         const formData = Object.fromEntries(form.entries())
         console.log(formData)
+        router.push('/home')
     }
     const router = useRouter()
+
     return (
         <div>
             <Head>
