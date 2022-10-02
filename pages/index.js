@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Wiraly</title>
+        <title>One Seller</title>
         <meta name="" content="" />
         <link rel="icon" href="" />
       </Head>

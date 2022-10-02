@@ -11,9 +11,9 @@ import HeaderNavigation from '../components/navigations/header.navigations'
 
 export default function Home() {
     return (
-        <div className='bg-yellow-50 pb-24 min-h-screen'>
+        <div className='bg-white pb-24 min-h-screen'>
             <Head>
-                <title>Wiraly</title>
+                <title>One Seller</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>
@@ -28,9 +28,9 @@ export default function Home() {
                     <div className='flex my-6 justify-between font-bold'><div>Recommended</div><div className='pb-1 border-b-yellow-300 border-b-2'>See All</div></div>
                     <div className='w-full  md:grid lg:grid lg:grid-cols-4 md:grid-cols-2 md:space-x-0 md:gap-y-4 lg:space-x-0 flex snap-x space-x-4 px-2  py-2 snap-mandatory overflow-x-scroll lg:overflow-x-hidden'>
                         {/* recommended action card */}
-                        <RecommendedActionCard />
-                        <RecommendedActionCard />
-                        <RecommendedActionCard />
+                        <RecommendedActionCard action="Add a brand logo" />
+                        <RecommendedActionCard action="Create your first item"/>
+                        <RecommendedActionCard action="Add a brand logo" />
                         <RecommendedActionCard />
                     </div>
 

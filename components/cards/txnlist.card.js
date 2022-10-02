@@ -8,7 +8,7 @@ export default function TxnListCard(props) {
     return (
         <div>
         <div className='grid border-b grid-cols-2 mt-6'>
-            <div onClick={()=>setIsContribution(true)} className={`border-b ${isContribution? 'border-b-yellow-300':''} cursor-pointer text-center`}>Contributions</div>
+            <div onClick={()=>setIsContribution(true)} className={`border-b ${isContribution? 'border-b-yellow-300':''} cursor-pointer text-center`}>Sales</div>
             <div onClick={()=>setIsContribution(false)} className={`border-b ${!isContribution? 'border-b-yellow-300':''} cursor-pointer text-center`}>Withdrawals</div>
         </div>
         {isContribution&&

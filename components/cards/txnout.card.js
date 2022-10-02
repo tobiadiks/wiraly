@@ -6,12 +6,12 @@ export default function TxnOutCard(props) {
                 <div className='h-4 w-4 my-auto rounded-full bg-yellow-100'></div>
                 <div className='ml-2'>
                     <div className='font-bold text-sm'>Successful</div>
-                    <div className=' text-sm'>for Vivo Phone</div>
+                    <div className=' text-sm'>3136664232</div>
                 </div>
             </div>
 
             <div className=''>
-                <div className='font-bold text-sm'>$5,000</div>
+                <div className='font-bold text-sm'>NGN 5,000</div>
                 <div className='text-sm'>Sep 30</div>
             </div>
         </div>
