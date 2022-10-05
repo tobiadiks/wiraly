@@ -15,9 +15,35 @@ import TextAreaWithTop from '../../components/textboxes/textareawithtop.textbox'
 import TextWithTop from '../../components/textboxes/textwithtop.textbox'
 import SimpleWhiteTheme from '../../components/themes/simple_white'
 import SimpleYellowTheme from '../../components/themes/simple_yellow'
+import dynamic from 'next/dynamic'
+// import { commands } from '@uiw/react-md-editor'
+
+const SimpleMdeReact = dynamic(
+    () => import ("react-simplemde-editor").then(mod=>mod.default),
+    { ssr: false }
+  );
+
+
 
 
 export default function Home() {
+const defaultName=`
+Apple iPhone 13 PRO - 6GB RAM - 512GB - 5G - Graphite
+`
+
+    const defaultDescription=`
+
+    **What is an iPhone?**
+
+* Manufacturer - Apple
+* Operating System - iOS 15
+* Rear Camera - 12MP + 12MP + 12MP
+* Front Camera - 12MP
+* RAM - 6GB
+* Internal Memory - 512GB
+
+iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colourful, sharper and brighter 6.1-inch Super Retina XDR display with ProMotion for faster, more responsive feel. A15 Bionic chip, the world's fastest smartphone chip for lightning-fast performance. Durable design and a huge leap in battery life.
+    `
 
     const router=useRouter()
 
@@ -29,8 +55,8 @@ export default function Home() {
         // router.push('/home')
     }
 
-    const [productName, setProductName] = useState('Your Product Name')
-    const [productDescription, setProductDescription] = useState('Your Product Description')
+    const [productName, setProductName] = useState(defaultName)
+    const [productDescription, setProductDescription] = useState(defaultDescription)
     const [productPrice, setProductPrice] = useState(100)
     const [theme, setTheme] = useState('simplewhite')
 
@@ -78,13 +104,18 @@ export default function Home() {
             <main className=' flex  flex-col   w-full'>
                 <section className='mt-14 max-h-screen flex'>
                     {/* editor */}
-                    <div className='w-1/4 p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
+                    <div className='md:w-1/4 w-0 p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
                         <div className=' text-3xl md:text-2xl'>Add New <span className='font-bold'>Product</span></div>
                         <div className=' text-xs md:text-sm'>Add some information for the product you want to create</div>
                         {/* form */}
                         <form onSubmit={handleSubmit} className='mt-8 space-y-8 h-full '>
                             <TextWithTop value={productName} onchange={(e) => setProductName(e.target.value)} ring full name='product_name' text='Product Name' />
-                            <TextAreaWithTop value={productDescription} onchange={(e) => setProductDescription(e.target.value)} ring full name='product_description' text='Product Description' />
+                            {/* <TextAreaWithTop value={productDescription} onchange={(e) => setProductDescription(e.target.value)} ring full name='product_description' text='Product Description' /> */}
+                           <SimpleMdeReact
+                           value={productDescription}
+                           onChange={(value) => setProductDescription(value)}
+            
+                           />
                             <TextWithTop value={productPrice} onchange={(e) => setProductPrice(e.target.value)} type='number' min={0} ring full name='product_price' text={`Price(${'NGN'})`} />
                             {/* images */}
                             <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
@@ -126,7 +157,7 @@ export default function Home() {
                     </div>
 
                     {/* preview */}
-                    <div className='w-3/4 p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
+                    <div className='md:w-3/4 w-full p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
                         {/* theme render */}
 
                         {currentTheme()}
