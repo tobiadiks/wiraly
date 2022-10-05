@@ -104,7 +104,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
             <main className=' flex  flex-col   w-full'>
                 <section className='mt-14 max-h-screen flex'>
                     {/* editor */}
-                    <div className='md:w-1/4 w-0 p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
+                    <div className='md:w-1/4 hidden md:block w-0 p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
                         <div className=' text-3xl md:text-2xl'>Add New <span className='font-bold'>Product</span></div>
                         <div className=' text-xs md:text-sm'>Add some information for the product you want to create</div>
                         {/* form */}
