@@ -18,9 +18,10 @@ import SimpleWhiteTheme from '../../components/themes/simple_white'
 import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import SideNavigation from '../../components/navigations/side.navigation'
 import { useRouter } from 'next/router'
+import AuthGuard from '../../components/hoc/authGuard'
 
 
-export default function Home() {
+export default function  Home() {
     const router=useRouter()
 
     const handleSubmit = async (e) => {
@@ -68,7 +69,8 @@ export default function Home() {
     // End of theme Handler
 
     return (
-        <div className='bg-white pb-24 min-h-screen'>
+        <AuthGuard>
+        <div className='bg-white  min-h-screen'>
             <Head>
                 <title>One Seller</title>
                 <meta name="" content="" />
@@ -115,5 +117,7 @@ export default function Home() {
             </main>
 
         </div>
+        </AuthGuard>
     )
 }
+

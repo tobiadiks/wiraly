@@ -16,6 +16,7 @@ import TextWithTop from '../../components/textboxes/textwithtop.textbox'
 import SimpleWhiteTheme from '../../components/themes/simple_white'
 import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import dynamic from 'next/dynamic'
+import AuthGuard from '../../components/hoc/authGuard'
 // import { commands } from '@uiw/react-md-editor'
 
 const SimpleMdeReact = dynamic(
@@ -33,7 +34,6 @@ Apple iPhone 13 PRO - 6GB RAM - 512GB - 5G - Graphite
 
     const defaultDescription=`
 
-    **What is an iPhone?**
 
 * Manufacturer - Apple
 * Operating System - iOS 15
@@ -92,7 +92,8 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     // End of theme Handler
 
     return (
-        <div className='bg-white pb-24 min-h-screen'>
+        <AuthGuard>
+        <div className='bg-white min-h-screen'>
             <Head>
                 <title>One Seller</title>
                 <meta name="" content="" />
@@ -169,5 +170,6 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
             </main>
 
         </div>
+        </AuthGuard>
     )
 }

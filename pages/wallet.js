@@ -10,7 +10,7 @@ import TxnListCard from '../components/cards/txnlist.card'
 export default function Home() {
     const router = useRouter()
     return (
-        <div className='bg-white pb-24 min-h-screen'>
+        <div className='bg-white pb-0 min-h-screen'>
             <Head>
                 <title>One Seller</title>
                 <meta name="" content="" />
