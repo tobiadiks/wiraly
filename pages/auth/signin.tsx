@@ -29,7 +29,7 @@ export default function SignIn({ providers }) {
 
                         <div className='mx-auto my-6 space-y-4 items-center  w-full md:w-1/2 lg:w-1/3 flex-col flex'>
                             {/*  <div className='font-bold text-center w-fit mx-auto'>it&apos;s for free!</div> */}
-                            {Object.values(providers instanceof providers).map((provider) => (
+                            {Object.values(providers).map((provider) => (
                                 session ?
                                     <PrimaryButton key={provider.name} type='button' onclick={() => signOut(provider.id)} full ring rounded text={`Sign out`} />
                                     :
