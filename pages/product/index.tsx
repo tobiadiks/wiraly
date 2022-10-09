@@ -19,55 +19,19 @@ import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import SideNavigation from '../../components/navigations/side.navigation'
 import { useRouter } from 'next/router'
 import AuthGuard from '../../components/hoc/authGuard'
+import productHandler from '../api/product'
+import { useSession } from 'next-auth/react'
 
 
 export default function  Home() {
     const router=useRouter()
+    const {data:session}=useSession()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const form = new FormData(e.target)
-        const formData = Object.fromEntries(form.entries())
-        console.log(formData)
-        // router.push('/home')
+    const getUserProduct=async (data:{id:string})=>{
+fetch("/api/product",{method:"GET",body:JSON.stringify(data)}).then((res)=>console.log(res))
     }
-
-    const [productName, setProductName] = useState('Your Product Name')
-    const [productDescription, setProductDescription] = useState('Your Product Name')
-    const [productPrice, setProductPrice] = useState(100)
-    const [theme, setTheme] = useState('simplewhite')
-
-    // Theme Handler
-    const currentTheme = () => {
-        switch (theme) {
-            case 'simplewhite':
-                return <SimpleWhiteTheme
-                    product_name={productName}
-                    product_description={productDescription}
-                    product_price={productPrice}
-                />;
-            case 'simpleyellow':
-                return <SimpleYellowTheme
-                    product_name={productName}
-                    product_description={productDescription}
-                    product_price={productPrice}
-                />
-
-
-            default:
-                <SimpleWhiteTheme
-                    product_name={productName}
-                    product_description={productDescription}
-                    product_price={productPrice}
-
-                />
-
-        }
-
-    }
-
-    // End of theme Handler
-
+    
+ 
     return (
         <AuthGuard>
         <div className='bg-white  min-h-screen'>

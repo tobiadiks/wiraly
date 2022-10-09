@@ -2,11 +2,12 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
+  referentialIntegrity="prisma"
 }
 
 generator client {
   provider        = "prisma-client-js"
-  // previewFeatures = ["referentialActions"] // You won't need this in Prisma 3.X or higher.
+  previewFeatures = ["referentialIntegrity"] // Allows foreign key with mysql database.
 }
 
 model Account {
@@ -44,6 +45,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  products      Product[]
 }
 
 model VerificationToken {
@@ -52,4 +54,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// product model
+
+model Product{
+  id String @id @default(cuid())
+  userId String
+  name String
+  price Int @default(0)
+  description String?
+  clicks Int @default(0)
+
+  user User @relation(fields:[userId], references:[id],onDelete:Cascade)
 }
