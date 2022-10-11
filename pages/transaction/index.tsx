@@ -70,7 +70,7 @@ export default function Home() {
     return (
         <div className='bg-white pb-0 min-h-screen'>
             <Head>
-                <title>One Seller</title>
+                <title>Oneseller</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>

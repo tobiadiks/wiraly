@@ -11,7 +11,7 @@ export default function SignIn({ providers }) {
         <>
             <div>
                 <Head>
-                    <title>One Seller</title>
+                    <title>Oneseller</title>
                     <meta name="" content="" />
                     <link rel="icon" href="" />
                 </Head>

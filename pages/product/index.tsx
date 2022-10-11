@@ -36,7 +36,7 @@ fetch("/api/product",{method:"GET",body:JSON.stringify(data)}).then((res)=>conso
         <AuthGuard>
         <div className='bg-white  min-h-screen'>
             <Head>
-                <title>One Seller</title>
+                <title>Oneseller</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>
@@ -49,7 +49,7 @@ fetch("/api/product",{method:"GET",body:JSON.stringify(data)}).then((res)=>conso
                    <SideNavigation/>
 
                     {/* preview */}
-                    <div className='w-3/4 p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
+                    <div className='lg:w-3/4 w-full p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
                         {/* products */}
 
                         <section>
@@ -61,7 +61,7 @@ fetch("/api/product",{method:"GET",body:JSON.stringify(data)}).then((res)=>conso
                         <option className='text-yellow-400'>Archived</option>
                     </select>
                     </div>
-                    <div className='w-full md:grid lg:grid lg:grid-cols-4 md:grid-cols-2 gap-y-6'>
+                    <div className='w-full grid md:grid lg:grid lg:grid-cols-4 md:grid-cols-2 gap-6'>
                         {/* product card */}
                         <ProductCard />
                         <ProductCard />

@@ -95,7 +95,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         <AuthGuard>
         <div className='bg-white min-h-screen'>
             <Head>
-                <title>One Seller</title>
+                <title>Oneseller</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>
@@ -103,9 +103,9 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
             <HeaderNavigation />
 
             <main className=' flex  flex-col   w-full'>
-                <section className='mt-14 max-h-screen flex'>
+                <section className='pt-12 max-h-screen flex'>
                     {/* editor */}
-                    <div className='md:w-1/4 hidden md:block w-0 p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
+                    <div className='lg:w-1/4 hidden md:block w-0 p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
                         <div className=' text-3xl md:text-2xl'>Add New <span className='font-bold'>Product</span></div>
                         <div className=' text-xs md:text-sm'>Add some information for the product you want to create</div>
                         {/* form */}
@@ -158,7 +158,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     </div>
 
                     {/* preview */}
-                    <div className='md:w-3/4 w-full p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
+                    <div className='lg:w-3/4 w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
                         {/* theme render */}
 
                         {currentTheme()}

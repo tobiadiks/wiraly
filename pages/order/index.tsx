@@ -69,7 +69,7 @@ export default function Home() {
     return (
         <div className='bg-white pb-0 min-h-screen'>
             <Head>
-                <title>One Seller</title>
+                <title>Oneseller</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>
@@ -83,7 +83,7 @@ export default function Home() {
 
                     {/* preview */}
 
-                    <div className='w-3/4 p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
+                    <div className='w-full p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
                         {/* products */}
 
                         <section>
@@ -104,15 +104,15 @@ export default function Home() {
                                    
                                 </select>
                             </div>
-                            <div className='grid grid-cols-7  p-2 gap-x-2'>
+                            <div className='grid grid-cols-5  p-2 gap-x-2'>
                                 <div className='mx-auto my-auto font-bold col-span-2'>Order ID</div>
                                 <div className='mx-auto my-auto font-bold '>Price</div>
-                                <div className='mx-auto my-auto font-bold '>Phone</div>
-                                <div className='mx-auto my-auto font-bold '>Destination</div>
+                                {/* <div className='mx-auto my-auto font-bold '>Phone</div> */}
+                                {/* <div className='mx-auto my-auto font-bold '>Destination</div> */}
                                 <div className='mx-auto my-auto font-bold '>Date</div>
                                 <div className='mx-auto my-auto font-bold '>Status</div>
                             </div>
-                            <div className='w-full md:grid lg:grid lg:grid-cols-1 md:grid-cols-1 gap-y-6'>
+                            <div className='w-full grid md:grid lg:grid lg:grid-cols-1 md:grid-cols-1 gap-y-6'>
                                 {/* order card */}
                                 <OrderCard/>
                                 <OrderCard/>
