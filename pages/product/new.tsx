@@ -95,7 +95,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         <AuthGuard>
         <div className='bg-white min-h-screen'>
             <Head>
-                <title>Oneseller</title>
+                <title>Salespadi</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>

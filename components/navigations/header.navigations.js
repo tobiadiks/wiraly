@@ -10,7 +10,7 @@ export default function HeaderNavigation() {
     const router=useRouter()
     return (
         <nav className='w-full z-50 py-4 px-4 bg-yellow-50 border-b border-b-gray-100 flex fixed top-0 justify-between ' >
-            <div onClick={()=>{session?router.push("/dashboard/"):router.push("/")}} className='text-yellow-300 cursor-pointer my-auto font-bold' > Oneseller </div>
+            <div onClick={()=>{session?router.push("/dashboard/"):router.push("/")}} className='text-yellow-300 cursor-pointer my-auto font-bold' > Salespadi </div>
             {/* <div className='space-x-4' >
                 <TertiaryButton text='Signup' />
                 <PrimaryButton text='Login' />

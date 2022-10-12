@@ -12,7 +12,7 @@ export default function UnauthNotificationPage() {
   return (
     <div>
       <Head>
-        <title>Oneseller</title>
+        <title>Salespadi</title>
         <meta name="" content="" />
         <link rel="icon" href="" />
       </Head>

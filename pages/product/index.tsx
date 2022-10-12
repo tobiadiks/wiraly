@@ -36,7 +36,7 @@ fetch("/api/product",{method:"GET",body:JSON.stringify(data)}).then((res)=>conso
         <AuthGuard>
         <div className='bg-white  min-h-screen'>
             <Head>
-                <title>Oneseller</title>
+                <title>Salespadi</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>

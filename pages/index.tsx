@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Oneseller</title>
+        <title>Salespadi</title>
         <meta name="" content="" />
         <link rel="icon" href="" />
       </Head>
@@ -33,7 +33,7 @@ export default function Home() {
           
         </section>
         <section className='px-4 lg:flex py-12 bg-gray-900 text-white'>
-          <div className=' text-xl md:text-3xl lg:w-1/3 md:w-1/2 text-left font-bold'>Oneseller platform brings together all the tools a business needs to sell and manage their inventory. </div>
+          <div className=' text-xl md:text-3xl lg:w-1/3 md:w-1/2 text-left font-bold'>Salespadi platform brings together all the tools a business needs to sell and manage their inventory. </div>
           <div className='w-fit mx-auto my-4'>Video</div>     
         </section>
         <section className='px-4  py-12  pb-12 '>
@@ -50,7 +50,7 @@ export default function Home() {
         <div className='w-fit mx-auto font-bold text-gray-700'>Start selling</div>     
           <div className=' text-lg md:text-2xl mt-2  text-left font-bold mx-auto w-fit'>Sell anything everywhere</div>
           <div className='w-fit mx-auto my-4'>checkout</div>  
-          <div className='w-fit lg:w-1/3 md:w-1/2 text-center mx-auto my-4'>With Oneseller, it does&apos;nt matter if you have 1 product or 100k products - we&apos;ll keep it simple so you can focus on product development.</div>        
+          <div className='w-fit lg:w-1/3 md:w-1/2 text-center mx-auto my-4'>With Salespadi, it does&apos;nt matter if you have 1 product or 100k products - we&apos;ll keep it simple so you can focus on product development.</div>        
           <div className='w-full md:w-1/2 lg:w-1/3  mx-auto'>
           <PrimaryButton type='button' onclick={() => signIn()} full  rounded ring  text='Make sales today' />
           </div>
@@ -72,7 +72,7 @@ export default function Home() {
         </section>
         <section className='px-4 w-full flex flex-col  py-12 bg-yellow-50 '>
           <div className=' text-2xl md:text-4xl md:mx-auto lg:w-fit text-left md:text-center font-bold text-gray-900'>Build and start growing</div>
-          <div className='w-fit lg:w-1/3 md:w-1/2 md:text-center mx-auto my-4'>Oneseller makes it easy to set up, manage and sell the digital and physical products you want to offer online. No coding knowledge needed!</div>   
+          <div className='w-fit lg:w-1/3 md:w-1/2 md:text-center mx-auto my-4'>Salespadi makes it easy to set up, manage and sell the digital and physical products you want to offer online. No coding knowledge needed!</div>   
           <div className='w-full md:w-1/2 lg:w-1/3  mx-auto'>
           <PrimaryButton type='button' onclick={() => signIn()} full  rounded ring  text='Start free' />
           </div>  
