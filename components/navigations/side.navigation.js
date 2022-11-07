@@ -11,7 +11,7 @@ export default function SideNavigation(){
     
     const [currentRoute,setCurrentRoute]=useState('')
     return(
-        <div className='w-1/4 p-4 bg-white min-h-screen h-screen static space-y-4 overflow-y-auto border-r hidden lg:block'>
+        <div className='w-1/5 p-4 bg-white min-h-screen h-screen static space-y-4 overflow-y-auto border-r hidden lg:block'>
         <div onClick={()=> router.push('/dashboard')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('dashboard')? 'text-yellow-300':'text-black'} font-bold`}>
          <div className='h-4 w-4 mr-2'>
              <FontAwesomeIcon icon={faDashboard}/>

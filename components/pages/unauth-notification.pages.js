@@ -19,7 +19,7 @@ export default function UnauthNotificationPage() {
       {/* nav header */}
       <HeaderNavigation />
 
-      <main className='my-24 flex flex-col w-full'>
+      <main className='my-24 flex flex-col w-full bg-yellow-50'>
         <section className='px-4'>
           <div className=' text-3xl md:text-5xl text-center font-bold'>Oops! Something went wrong</div>
           <div className='w-fit mx-auto my-4 text-center'>You have not signed in your account.</div>

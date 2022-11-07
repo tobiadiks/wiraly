@@ -81,12 +81,42 @@ export default function Home() {
                    <SideNavigation/>
 
                     {/* preview */}
-                    <div className='w-3/4 p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
-                        {/* theme render */}
+                    <div className='w-3/5 p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
+                        {/* products */}
 
-                        {currentTheme()}
+                        <section>
+                            <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Dashboard</div><div>
+                                {/* <PrimaryButton type={'button'} onclick={()=>router.push('/product/new')} full text='Add Product' /> */}
+                            </div></div>
+                            <div className='grid grid-cols-4 my-6 h-32 font-bold gap-4'>
+                               <div className='border-gray-200 border w-full h-full rounded-sm'></div>
+                               <div className='border-gray-200 border w-full h-full rounded-sm'></div>
+                               <div className='border-gray-200 border w-full h-full rounded-sm'></div>
+                               <div className='border-gray-200 border w-full h-full rounded-sm'></div>
+                            </div>
+{/* chart */}
+                            <div className='grid grid-cols-1 my-6 h-64 font-bold gap-4'>
+                               <div className='border-gray-200 border w-full h-full rounded-sm'></div>
+                              
+                            </div>
+                            <div className='grid grid-cols-1 my-6 h-64 font-bold gap-4'>
+                               <div className='border-gray-200 border w-full h-full rounded-sm'></div>
+                              
+                            </div>
+                            
+                   
+                        </section>
 
+                    </div>
+                    <div className='w-1/5 p-4 bg-white min-h-screen h-screen  border-l overflow-y-auto '>
+<div className='flex justify-between'>
+    <div className="h-8 w-8 rounded-full border"></div>
+    <div className="h-8 w-8 rounded-full border"></div>
+</div>
+<div className="h-16 w-16 mt-8 rounded-full border bg-blue-200 mx-auto">
 
+</div>
+<div className="mt-2 font-bold w-fit mx-auto">Salespadi</div>
                     </div>
 
                 </section>

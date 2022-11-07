@@ -13,10 +13,10 @@ export default function productHandler(req:NextApiRequest, res:NextApiResponse,)
 }
 
 async function getProducts(req:NextApiRequest,res:NextApiResponse,) {
-  const userId:string=req.body.id
+  const userId:string=req.body
+  console.log(userId)
   try {
-    const response={data:"John"}
-// await prisma?.product.findMany({where:{userId:userId}})
+const response=await prisma.product.findMany({where:{userId:userId}})
     res.status(200).json(response)
   } catch (error) {
     res.status(500).json(error)

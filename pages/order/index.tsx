@@ -105,7 +105,7 @@ export default function Home() {
                                 </select>
                             </div>
                             <div className='grid grid-cols-5  p-2 gap-x-2'>
-                                <div className='mx-auto my-auto font-bold col-span-2'>Order ID</div>
+                                <div className='mx-auto my-auto font-bold col-span-2'>Product Name</div>
                                 <div className='mx-auto my-auto font-bold '>Price</div>
                                 {/* <div className='mx-auto my-auto font-bold '>Phone</div> */}
                                 {/* <div className='mx-auto my-auto font-bold '>Destination</div> */}
