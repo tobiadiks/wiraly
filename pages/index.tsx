@@ -5,10 +5,15 @@ import SecondaryButton from '../components/buttons/secondary.button'
 import FooterNavigation from '../components/navigations/footer.navigation'
 import HeaderNavigation from '../components/navigations/header.navigations'
 import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/react'
+
 
 export default function Home() {
+
   const router = useRouter()
+const signIn=()=>{
+  router.push('/auth/login')
+}
+
   return (
     <div>
       <Head>
