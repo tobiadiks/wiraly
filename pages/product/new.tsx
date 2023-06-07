@@ -110,14 +110,14 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                         <div className=' text-xs md:text-sm'>Add some information for the product you want to create</div>
                         {/* form */}
                         <form onSubmit={handleSubmit} className='mt-8 space-y-8 h-full '>
-                            <TextWithTop value={productName} onchange={(e) => setProductName(e.target.value)} ring full name='product_name' text='Product Name' />
-                            {/* <TextAreaWithTop value={productDescription} onchange={(e) => setProductDescription(e.target.value)} ring full name='product_description' text='Product Description' /> */}
+                            <TextWithTop value={productName} onChange={(e) => setProductName(e.target.value)} ring full name='product_name' text='Product Name' />
+                            {/* <TextAreaWithTop value={productDescription} onChange={(e) => setProductDescription(e.target.value)} ring full name='product_description' text='Product Description' /> */}
                            <SimpleMdeReact
                            value={productDescription}
                            onChange={(value) => setProductDescription(value)}
             
                            />
-                            <TextWithTop value={productPrice} onchange={(e) => setProductPrice(e.target.value)} type='number' min={0} ring full name='product_price' text={`Price(${'NGN'})`} />
+                            <TextWithTop value={productPrice} onChange={(e) => setProductPrice(e.target.value)} type='number' min={0} ring full name='product_price' text={`Price(${'NGN'})`} />
                             {/* images */}
                             <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
                             <div className='w-full grid grid-cols-4 gap-4'>

@@ -11,11 +11,13 @@ export default function LogIn() {
     const { data: session } = { data: false };
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [loading,setLoading]= useState(false)
     const {token,setToken}=useToken()
 
 
 
     const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
 
         const formData = new FormData();
@@ -31,11 +33,13 @@ export default function LogIn() {
             const data = await response.data;
             console.log(data);
             setToken(data)
-            
+            setLoading(false)
         } else {
             // Form submission failed
             console.error('Form submission failed');
+            setLoading(false)
         }
+        setLoading(false)
     };
 
     return (
@@ -61,9 +65,9 @@ export default function LogIn() {
                         <form onSubmit={handleSubmit} className='mx-auto my-6 space-y-4 items-center  w-full md:w-1/2 lg:w-1/3 flex-col flex'>
                             {/*  <div className='font-bold text-center w-fit mx-auto'>it&apos;s for free!</div> */}
 
-                            <TextWithTop full ring rounded text={"Email"} value={email} onchange={(e) => setEmail(e.target.value)} />
-                            <TextWithTop type={"password"} full ring rounded text={"Password"} value={password} onchange={(e) => setPassword(e.target.value)} />
-                            <PrimaryButton type='submit' full ring rounded text='Login' />
+                            <TextWithTop disabled={loading} required full ring rounded text={"Email"} value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <TextWithTop disabled={loading} required type={"password"} full ring rounded text={"Password"} value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <PrimaryButton disabled={loading || !email?.length || !password?.length} type='submit' full ring rounded text={loading?'Loading...':'Login'} />
                             <div className='font-bold text-center w-fit text-sm mx-auto cursor-pointer'>By Continuing, you agree to our <span className='underline cursor-pointer'>Terms and Condition</span>,<span className='underline'>Privacy Policy</span></div>
                         </form>
 
