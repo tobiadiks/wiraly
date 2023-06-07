@@ -31,6 +31,7 @@ export default function LogIn() {
             const data = await response.data;
             console.log(data);
             setToken(data)
+            
         } else {
             // Form submission failed
             console.error('Form submission failed');
