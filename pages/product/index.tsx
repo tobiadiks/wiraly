@@ -4,15 +4,14 @@ import ProductCard from '../../components/cards/product.card'
 import HeaderNavigation from '../../components/navigations/header.navigations'
 import SideNavigation from '../../components/navigations/side.navigation'
 import { useRouter } from 'next/router'
-import AuthGuard from '../../components/hoc/authGuard'
-import { useSession } from 'next-auth/react'
+
 import axios from 'axios'
 import { useEffect } from 'react'
 
 
 export default function Home() {
     const router = useRouter()
-    const { data } = useSession()
+   
 
     const getUserProduct = async () => {
         axios.get("/api/product", { data: { id: data.user.email } }).then(i => console.log(i))
@@ -23,7 +22,7 @@ export default function Home() {
     })
 
     return (
-        <AuthGuard>
+        <>
             <div className='bg-white  min-h-screen'>
                 <Head>
                     <title>Salespadi</title>
@@ -71,7 +70,7 @@ export default function Home() {
                 </main>
 
             </div>
-        </AuthGuard>
+        </>
     )
 }
 

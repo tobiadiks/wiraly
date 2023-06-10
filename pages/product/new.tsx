@@ -92,7 +92,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     // End of theme Handler
 
     return (
-        <AuthGuard>
+        <>
         <div className='bg-white min-h-screen'>
             <Head>
                 <title>Salespadi</title>
@@ -170,6 +170,6 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
             </main>
 
         </div>
-        </AuthGuard>
+        </>
     )
 }

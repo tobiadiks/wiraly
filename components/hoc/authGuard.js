@@ -1,21 +1,44 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 import UnauthNotificationPage from "../pages/unauth-notification.pages";
+import { useEffect, useState } from "react";
+import useToken from "../../hooks/useToken";
 
 export default function AuthGuard({children}){
-    const { data: session } = useSession()
+  const router = useRouter();
+  const [authorized, setAuthorized]= useState(false);
+  const {token}= useToken()
+  
+  useEffect(()=> {
+    // on initial load - run auth check
+    authCheck(router.asPath)
 
-  if (!session) {
-    return (
-      <>
-        {/* Signed in as {session.user.email} <br /> */}
-        {/* {console.log(session.user.image)} */}
-        {children}
-      </>
-    )
+    // on route change state
+    const hideContent=()=>setAuthorized(false)
+    router.events.on('hashChangeStart', hideContent)
+
+    // on route change complete
+    router.events.on('routeChangeComplete',authCheck)
+
+    // unsubscribe from event
+    return ()=>{
+      router.events.off('routeChangeStart', hideContent)
+      router.events.off('routeChangeComplete', authCheck)
+    }
+
+  }, [])
+
+  function authCheck(url) {
+    // redirect to login page if accessing a private page and not logged in
+    const publicPaths = ['/auth/login'];
+    const path= url.split('?')[0]
+    if(token && !publicPaths.includes(path)){
+      setAuthorized(false);
+      router.push('/auth/login',{query:router.asPath});
+    }
+    else{
+      setAuthorized(true);
+    }
   }
-  return (
-    <>
-      <UnauthNotificationPage/>
-    </>
-  )
+
+  return (authorized && children)
 }
