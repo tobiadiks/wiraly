@@ -69,7 +69,7 @@ export default function Home() {
     return (
         <div className='bg-white pb-0 min-h-screen'>
             <Head>
-                <title>Salespadi</title>
+                <title>Seltra</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>

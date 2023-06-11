@@ -68,7 +68,7 @@ export default function Home() {
     return (
         <div className='bg-white pb-0 min-h-screen'>
             <Head>
-                <title>Salespadi</title>
+                <title>Seltra</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>
@@ -116,7 +116,7 @@ export default function Home() {
 <div className="h-16 w-16 mt-8 rounded-full border bg-blue-200 mx-auto">
 
 </div>
-<div className="mt-2 font-bold w-fit mx-auto">Salespadi</div>
+<div className="mt-2 font-bold w-fit mx-auto">Seltra</div>
                     </div>
 
                 </section>

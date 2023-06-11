@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { NextApiRequest, NextApiResponse } from "next"
-// import { useSession } from "next-auth/react"
+// import { useuser } from "next-auth/react"
 
 
 export default function productHandler(req:NextApiRequest, res:NextApiResponse,) {

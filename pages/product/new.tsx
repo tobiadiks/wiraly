@@ -95,7 +95,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         <>
         <div className='bg-white min-h-screen'>
             <Head>
-                <title>Salespadi</title>
+                <title>Seltra</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>

@@ -9,7 +9,7 @@ import useToken from '../../hooks/useToken';
 import { useRouter } from 'next/router';
 export default function LogIn() {
 
-    const { data: session } = { data: false };
+    const { data: user } = { data: false };
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [loading,setLoading]= useState(false)
@@ -35,7 +35,7 @@ export default function LogIn() {
             console.log(data);
             setToken(data)
             setLoading(false)
-            router.push('/dashboard')
+            await router.push('/dashboard')
         } else {
             // Form submission failed
             console.error('Form submission failed');
@@ -48,7 +48,7 @@ export default function LogIn() {
         <>
             <div>
                 <Head>
-                    <title>Salespadi</title>
+                    <title>Seltra</title>
                     <meta name="" content="" />
                     <link rel="icon" href="" />
                 </Head>
@@ -58,7 +58,7 @@ export default function LogIn() {
                 <main className='my-24 flex flex-col w-full bg-yellow-50'>
                     <section className='px-4'>
                         <div className=' text-3xl md:text-5xl text-center font-bold'>Let&apos;s get you started</div>
-                        {session ?
+                        {user ?
                             <div className='w-fit mx-auto my-4 text-center'>You have signed in already.</div>
                             :
                             <div className='w-fit mx-auto my-4 text-center'>Choose an account to sign in with.</div>

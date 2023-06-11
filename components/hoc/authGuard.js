@@ -25,16 +25,16 @@ export default function AuthGuard({children}){
       router.events.off('routeChangeComplete', authCheck)
     }
 
-  })
+  },[])
 
   
-  function authCheck(url) {
+ async function authCheck(url) {
     // redirect to login page if accessing a private page and not logged in
     const publicPaths = ['/auth/login','/','/auth'];
     const path= url.split('?')[0]
     if(!token && !publicPaths.includes(path)){
       setAuthorized(false);
-      router.push('/auth');
+     await router.push('/auth');
     }
     else{
       setAuthorized(true);

@@ -22,7 +22,7 @@ export default function Profile() {
     return (
         <div>
             <Head>
-                <title>Salespadi</title>
+                <title>Seltra</title>
                 <meta name="" content="" />
                 <link rel="icon" href="" />
             </Head>

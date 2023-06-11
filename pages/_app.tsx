@@ -3,7 +3,7 @@ import "easymde/dist/easymde.min.css"
 import AuthGuard from '../components/hoc/authGuard'
 
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+function MyApp({ Component, pageProps: {...pageProps } }) {
   return (
 
     <div className='font-cabinet'>

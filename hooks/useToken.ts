@@ -13,19 +13,20 @@ export default function useToken() {
     const getUser = () => {
         if (typeof window !== 'undefined') {
             const userString = localStorage?.getItem('token')
-            const user = JSON.parse(userString)
+            const userToken = JSON.parse(userString)
+            const user= userToken?.user
             return user
         }
     }
 
 
     const [token, setToken] = useState(getToken())
-    const [session, setSession] = useState(getUser())
+    const [user, setUser] = useState(getUser())
 
     const saveToken = userToken => {
         if (typeof window !== 'undefined') {
             localStorage.setItem("token", JSON.stringify(userToken))
-            setSession(userToken)
+            setUser(userToken?.user)
             setToken(userToken?.accessToken)
         }
     }
@@ -34,6 +35,6 @@ export default function useToken() {
     return {
         setToken: saveToken,
         token,
-        session
+        user
     }
 }

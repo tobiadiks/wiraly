@@ -1,4 +1,4 @@
-Salespadi is a One-item store manager for SMEs and Large businesses who want to sell product and services fast.
+Seltra is a One-item store manager for SMEs and Large businesses who want to sell product and services fast.
 
 ## Features
 
