@@ -19,13 +19,13 @@ export default function SideNavigation(){
          <div>Dashboard</div>
         </div>
 
-        <div onClick={()=> router.push('/analytics')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('analytics')? 'text-yellow-300':'text-black'} `}>
+        {/* <div onClick={()=> router.push('/analytics')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('analytics')? 'text-yellow-300':'text-black'} `}>
          <div className='h-4 w-4 mr-2'>
              <FontAwesomeIcon icon={faChartSimple}/>
          </div>
          <div>Analytics</div>
 
-        </div>
+        </div> */}
 
         <div onClick={()=> router.push('/product')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('product')? 'text-yellow-300':'text-black'} `}>
          <div className='h-4 w-4 mr-2'>
@@ -51,13 +51,13 @@ export default function SideNavigation(){
 
         </div>
 
-        <div onClick={()=> router.push('/transaction')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('transaction')? 'text-yellow-300':'text-black'} `}>
+        {/* <div onClick={()=> router.push('/transaction')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('transaction')? 'text-yellow-300':'text-black'} `}>
          <div className='h-4 w-4 mr-2'>
              <FontAwesomeIcon icon={faFileInvoice}/>
          </div>
          <div>Transaction</div>
 
-        </div>
+        </div> */}
 
         <div onClick={()=> router.push('/setting')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('setting')? 'text-yellow-300':'text-black'} `}>
          <div className='h-4 w-4 mr-2'>
