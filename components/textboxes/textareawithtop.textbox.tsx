@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, TextareaHTMLAttributes } from "react";
 
-export default function TextAreaWithTop({ ...props }: { full: boolean, ring: boolean, rounded: boolean, text: string } & DetailedHTMLProps<
+export default function TextAreaWithTop({ ...props }: { full?: boolean, ring?: boolean, rounded?: boolean, text?: string } & DetailedHTMLProps<
     TextareaHTMLAttributes<HTMLTextAreaElement>,
     HTMLTextAreaElement
 >) {

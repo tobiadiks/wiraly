@@ -117,7 +117,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                            onChange={(value) => setProductDescription(value)}
             
                            />
-                            <TextWithTop value={productPrice} onChange={(e) => setProductPrice(e.target.value)} type='number' min={0} ring full name='product_price' text={`Price(${'NGN'})`} />
+                            <TextWithTop type={'number'} value={productPrice} onChange={(e) => setProductPrice(Number(e.target.value))}  min={0} ring full name='product_price' text={`Price(${'NGN'})`} />
                             {/* images */}
                             <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
                             <div className='w-full grid grid-cols-4 gap-4'>

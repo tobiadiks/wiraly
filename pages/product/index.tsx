@@ -13,9 +13,7 @@ export default function Home() {
     const router = useRouter()
    
 
-    const getUserProduct = async () => {
-        axios.get("/api/product", { data: { id: data.user.email } }).then(i => console.log(i))
-    }
+    
 
     useEffect(() => {
         // getUserProduct()

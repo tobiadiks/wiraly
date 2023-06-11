@@ -6,6 +6,7 @@ import SecondaryButton from "../../components/buttons/secondary.button";
 import TextWithTop from "../../components/textboxes/textwithtop.textbox";
 import axios, { formToJSON } from 'axios';
 import useToken from '../../hooks/useToken';
+import { useRouter } from 'next/router';
 export default function LogIn() {
 
     const { data: session } = { data: false };
@@ -13,7 +14,7 @@ export default function LogIn() {
     const [email, setEmail] = useState('');
     const [loading,setLoading]= useState(false)
     const {token,setToken}=useToken()
-
+    const router=useRouter()
 
 
     const handleSubmit = async (e) => {
@@ -34,6 +35,7 @@ export default function LogIn() {
             console.log(data);
             setToken(data)
             setLoading(false)
+            router.push('/dashboard')
         } else {
             // Form submission failed
             console.error('Form submission failed');
