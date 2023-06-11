@@ -74,8 +74,9 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         formData.append('theme', theme);
         formData.append('user', user?.id);
 
-        let data = Object.fromEntries(formData.entries())
+        let data: any = Object.fromEntries(formData.entries())
         data.images = []
+        
 
         console.log(data)
         // const json = formToJSON(formData)
