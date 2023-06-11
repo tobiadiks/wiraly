@@ -28,6 +28,7 @@ export default function HeaderNavigation() {
                 
                 <div className='flex'>
                     {user?.logo?
+                    // eslint-disable-next-line @next/next/no-img-element
                     <img alt={''} className='h-8 w-8 rounded-full my-auto mr-2' src={user?.logo} />
                     :
                     <FontAwesomeIcon className='h-4 w-4 rounded-full my-auto mr-2' icon={faUser}/>
