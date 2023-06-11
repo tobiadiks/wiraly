@@ -18,22 +18,26 @@ import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import dynamic from 'next/dynamic'
 import AuthGuard from '../../components/hoc/authGuard'
 import axios, { formToJSON } from 'axios'
+import useToken from '../../hooks/useToken'
 // import { commands } from '@uiw/react-md-editor'
 
 const SimpleMdeReact = dynamic(
-    () => import ("react-simplemde-editor").then(mod=>mod.default),
+    () => import("react-simplemde-editor").then(mod => mod.default),
     { ssr: false }
-  );
+);
 
 
 
 
 export default function Home() {
-const defaultName=`
+    const { token, user } = useToken()
+    
+
+    const defaultName = `
 Apple iPhone 13 PRO - 6GB RAM - 512GB - 5G - Graphite
 `
 
-    const defaultDescription=`
+    const defaultDescription = `
 
 
 * Manufacturer - Apple
@@ -46,7 +50,7 @@ Apple iPhone 13 PRO - 6GB RAM - 512GB - 5G - Graphite
 iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colourful, sharper and brighter 6.1-inch Super Retina XDR display with ProMotion for faster, more responsive feel. A15 Bionic chip, the world's fastest smartphone chip for lightning-fast performance. Durable design and a huge leap in battery life.
     `
 
-    const router=useRouter()
+    const router = useRouter()
 
 
     const [productName, setProductName] = useState(defaultName)
@@ -54,8 +58,8 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     const [productPrice, setProductPrice] = useState(100)
     const [productTotal, setProductTotal] = useState(1)
     const [theme, setTheme] = useState('simplewhite')
-    const [loading,setLoading]= useState(false)
-    
+    const [loading, setLoading] = useState(false)
+
     const handleSubmit = async (e) => {
         setLoading(true)
         e.preventDefault();
@@ -65,10 +69,22 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         formData.append('description', productDescription);
         formData.append('price', productPrice.toString());
         formData.append('total', productTotal.toString());
+        formData.append('sold', Number(0).toString());
+        formData.append('images', '');
         formData.append('theme', theme);
-        const json = formToJSON(formData)
+        formData.append('user', user?.id);
+
+        let data = Object.fromEntries(formData.entries())
+        data.images = []
+
+        console.log(data)
+        // const json = formToJSON(formData)
         // Send a POST request to the API route
-        const response = await axios.post('http://localhost:3001/api/product', json)
+        const response = await axios.post('http://localhost:3001/api/products', data, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
 
 
         if (response.status == 201) {
@@ -118,84 +134,84 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
 
     return (
         <>
-        <div className='bg-white min-h-screen'>
-            <Head>
-                <title>Seltra</title>
-                <meta name="" content="" />
-                <link rel="icon" href="" />
-            </Head>
-            {/* nav header */}
-            <HeaderNavigation />
+            <div className='bg-white min-h-screen'>
+                <Head>
+                    <title>Seltra</title>
+                    <meta name="" content="" />
+                    <link rel="icon" href="" />
+                </Head>
+                {/* nav header */}
+                <HeaderNavigation />
 
-            <main className=' flex  flex-col   w-full'>
-                <section className='pt-12 max-h-screen flex'>
-                    {/* editor */}
-                    <div className='lg:w-1/4 hidden md:block w-0 p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
-                        <div className=' text-3xl md:text-2xl'>Add New <span className='font-bold'>Product</span></div>
-                        <div className=' text-xs md:text-sm'>Add some information for the product you want to create</div>
-                        {/* form */}
-                        <form onSubmit={handleSubmit} className='mt-8 space-y-8 h-full '>
-                            <TextWithTop value={productName} onChange={(e) => setProductName(e.target.value)} ring full name='product_name' text='Product Name' />
-                            {/* <TextAreaWithTop value={productDescription} onChange={(e) => setProductDescription(e.target.value)} ring full name='product_description' text='Product Description' /> */}
-                           <SimpleMdeReact
-                           value={productDescription}
-                           onChange={(value) => setProductDescription(value)}
-            
-                           />
-                            <TextWithTop  type={'number'} value={productPrice} onChange={(e) => setProductPrice(Number(e.target.value))}  min={100}  ring full name='product_price' text={`Price(${'NGN'})`} />
-                            <TextWithTop  type={'number'} value={productTotal} onChange={(e) => setProductTotal(Number(e.target.value))}  min={1}  ring full name='product_total' text={`Total inventory`} />
-                            {/* images */}
-                            <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
-                            <div className='w-full grid grid-cols-4 gap-4'>
-                                {/* collection card */}
+                <main className=' flex  flex-col   w-full'>
+                    <section className='pt-12 max-h-screen flex'>
+                        {/* editor */}
+                        <div className='lg:w-1/4 hidden md:block w-0 p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
+                            <div className=' text-3xl md:text-2xl'>Add New <span className='font-bold'>Product</span></div>
+                            <div className=' text-xs md:text-sm'>Add some information for the product you want to create</div>
+                            {/* form */}
+                            <form onSubmit={handleSubmit} className='mt-8 space-y-8 h-full '>
+                                <TextWithTop value={productName} onChange={(e) => setProductName(e.target.value)} ring full name='product_name' text='Product Name' />
+                                {/* <TextAreaWithTop value={productDescription} onChange={(e) => setProductDescription(e.target.value)} ring full name='product_description' text='Product Description' /> */}
+                                <SimpleMdeReact
+                                    value={productDescription}
+                                    onChange={(value) => setProductDescription(value)}
 
-                                <UploadImagesCard type='Travel' price={145} />
-                                <UploadImagesCard type='Travel' price={145} />
-                                <UploadImagesCard type='Travel' price={145} />
-                                <UploadImagesCard type='Travel' price={145} />
-                            </div>
-
-                            {/* theme selection */}
-                            <div className='flex my-6 justify-between font-bold'><div>Select Theme</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
-                            <div className='w-full  flex snap-x space-x-4 px-2  py-2 snap-mandatory overflow-x-auto'>
-                                {/* theme card */}
-                                <ThemeCard
-                                    id='simplewhite'
-                                    name='Simple White'
-                                    onclick={() => setTheme('simplewhite')}
                                 />
-                                <ThemeCard
-                                    id='simpleyellow'
-                                    name='Simple Yellow'
-                                    onclick={() => setTheme('simpleyellow')}
-                                />
+                                <TextWithTop type={'number'} value={productPrice} onChange={(e) => setProductPrice(Number(e.target.value))} min={100} ring full name='product_price' text={`Price(${'NGN'})`} />
+                                <TextWithTop type={'number'} value={productTotal} onChange={(e) => setProductTotal(Number(e.target.value))} min={1} ring full name='product_total' text={`Total inventory`} />
+                                {/* images */}
+                                <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
+                                <div className='w-full grid grid-cols-4 gap-4'>
+                                    {/* collection card */}
 
-                            </div>
+                                    <UploadImagesCard type='Travel' price={145} />
+                                    <UploadImagesCard type='Travel' price={145} />
+                                    <UploadImagesCard type='Travel' price={145} />
+                                    <UploadImagesCard type='Travel' price={145} />
+                                </div>
 
-                            <div className='grid grid-cols-2 gap-4 align-baseline'>
-                                <SecondaryButton onclick={()=>router.push('/product')} type={'button'} full text='Cancel' />
-                                <PrimaryButton full text='Publish' />
-                            </div>
+                                {/* theme selection */}
+                                <div className='flex my-6 justify-between font-bold'><div>Select Theme</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
+                                <div className='w-full  flex snap-x space-x-4 px-2  py-2 snap-mandatory overflow-x-auto'>
+                                    {/* theme card */}
+                                    <ThemeCard
+                                        id='simplewhite'
+                                        name='Simple White'
+                                        onclick={() => setTheme('simplewhite')}
+                                    />
+                                    <ThemeCard
+                                        id='simpleyellow'
+                                        name='Simple Yellow'
+                                        onclick={() => setTheme('simpleyellow')}
+                                    />
+
+                                </div>
+
+                                <div className='grid grid-cols-2 gap-4 align-baseline'>
+                                    <SecondaryButton disabled={loading} onclick={() => router.push('/product')} type={'button'} full text='Cancel' />
+                                    <PrimaryButton disabled={loading} full text={loading?'Loading':'Publish'} />
+                                </div>
 
 
 
-                        </form>
+                            </form>
 
-                    </div>
+                        </div>
 
-                    {/* preview */}
-                    <div className='lg:w-3/4 w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
-                        {/* theme render */}
+                        {/* preview */}
+                        <div className='lg:w-3/4 w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
+                            {/* theme render */}
 
-                        {currentTheme()}
+                            {currentTheme()}
 
 
-                    </div>
+                        </div>
 
-                </section>
-            </main>
+                    </section>
+                </main>
 
-        </div>
+            </div>
         </>
     )
 }
