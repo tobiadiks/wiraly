@@ -55,7 +55,7 @@ export default function LogIn() {
                 {/* nav header */}
                 <HeaderNavigation />
 
-                <main className='my-24 flex flex-col w-full bg-yellow-50'>
+                <main className='my-24 flex flex-col w-full '>
                     <section className='px-4'>
                         <div className=' text-3xl md:text-5xl text-center font-bold'>Let&apos;s get you started</div>
                         {user ?

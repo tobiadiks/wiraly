@@ -17,6 +17,7 @@ import SimpleWhiteTheme from '../../components/themes/simple_white'
 import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import dynamic from 'next/dynamic'
 import AuthGuard from '../../components/hoc/authGuard'
+import axios, { formToJSON } from 'axios'
 // import { commands } from '@uiw/react-md-editor'
 
 const SimpleMdeReact = dynamic(
@@ -47,18 +48,42 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
 
     const router=useRouter()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const form = new FormData(e.target)
-        const formData = Object.fromEntries(form.entries())
-        console.log(formData)
-        // router.push('/home')
-    }
 
     const [productName, setProductName] = useState(defaultName)
     const [productDescription, setProductDescription] = useState(defaultDescription)
     const [productPrice, setProductPrice] = useState(100)
+    const [productTotal, setProductTotal] = useState(1)
     const [theme, setTheme] = useState('simplewhite')
+    const [loading,setLoading]= useState(false)
+    
+    const handleSubmit = async (e) => {
+        setLoading(true)
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('name', productName);
+        formData.append('description', productDescription);
+        formData.append('price', productPrice.toString());
+        formData.append('total', productTotal.toString());
+        formData.append('theme', theme);
+        const json = formToJSON(formData)
+        // Send a POST request to the API route
+        const response = await axios.post('http://localhost:3001/api/product', json)
+
+
+        if (response.status == 201) {
+            // Form submitted successfully
+            const data = await response.data;
+            console.log(data);
+            setLoading(false)
+            await router.push('/product')
+        } else {
+            // Form submission failed
+            console.error('Form submission failed');
+            setLoading(false)
+        }
+        setLoading(false)
+    };
 
     // Theme Handler
     const currentTheme = () => {
@@ -117,7 +142,8 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                            onChange={(value) => setProductDescription(value)}
             
                            />
-                            <TextWithTop type={'number'} value={productPrice} onChange={(e) => setProductPrice(Number(e.target.value))}  min={0} ring full name='product_price' text={`Price(${'NGN'})`} />
+                            <TextWithTop  type={'number'} value={productPrice} onChange={(e) => setProductPrice(Number(e.target.value))}  min={100}  ring full name='product_price' text={`Price(${'NGN'})`} />
+                            <TextWithTop  type={'number'} value={productTotal} onChange={(e) => setProductTotal(Number(e.target.value))}  min={1}  ring full name='product_total' text={`Total inventory`} />
                             {/* images */}
                             <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
                             <div className='w-full grid grid-cols-4 gap-4'>
