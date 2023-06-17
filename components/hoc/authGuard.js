@@ -30,7 +30,7 @@ export default function AuthGuard({children}){
   
  async function authCheck(url) {
     // redirect to login page if accessing a private page and not logged in
-    const publicPaths = ['/auth/login','/','/auth'];
+    const publicPaths = ['/auth/login','/','/auth','/buy/[id]'];
     const path= url.split('?')[0]
     if(!token && !publicPaths.includes(path)){
       setAuthorized(false);
