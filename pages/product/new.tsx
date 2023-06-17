@@ -19,7 +19,7 @@ import dynamic from 'next/dynamic'
 import AuthGuard from '../../components/hoc/authGuard'
 import axios, { formToJSON } from 'axios'
 import useToken from '../../hooks/useToken'
-import { FilePond } from 'react-filepond'
+import { FilePond as IFilePond} from 'react-filepond'
 import { makeDeleteRequest, makeUploadRequest } from '../../cloudinary/cloudinaryHelper'
 import { images } from '../../next.config'
 // import { commands } from '@uiw/react-md-editor'
@@ -186,6 +186,8 @@ const resetResponse=()=>{
     setImage('')
 }
 
+      // Hackishly cast FilePond as any
+    const FilePond: any = IFilePond
     return (
         <>
             <div className='bg-white min-h-screen'>
