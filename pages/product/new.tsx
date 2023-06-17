@@ -20,6 +20,7 @@ import AuthGuard from '../../components/hoc/authGuard'
 import axios, { formToJSON } from 'axios'
 import useToken from '../../hooks/useToken'
 import { FilePond } from 'react-filepond'
+import { makeDeleteRequest, makeUploadRequest } from '../../cloudinary/cloudinaryHelper'
 // import { commands } from '@uiw/react-md-editor'
 
 const SimpleMdeReact = dynamic(
@@ -119,6 +120,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     product_name={productName}
                     product_description={productDescription}
                     product_price={productPrice}
+                    product_image={files[0]}
                 />
 
 
@@ -127,7 +129,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     product_name={productName}
                     product_description={productDescription}
                     product_price={productPrice}
-
+                    product_image={files[0]}
                 />
 
         }
@@ -135,6 +137,41 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     }
 
     // End of theme Handler
+
+    const revert = (token, successCallback, errorCallback) => {
+        makeDeleteRequest({
+          token,
+          successCallback,
+          errorCallback,
+        });
+      };
+
+      const process = (
+        fieldName,
+          file,
+          metadata,
+          load,
+          error,
+          progress,
+          abort,
+          transfer,
+          options
+        ) => {
+          const abortRequest = makeUploadRequest({
+            file,
+            fieldName,
+            successCallback: load,
+            errorCallback: error,
+            progressCallback: progress,
+          });
+
+          return {
+            abort: () => {
+              abortRequest();
+              abort();
+            },
+          };
+        };
 
     return (
         <>
@@ -168,16 +205,17 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                                 <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
                                 <FilePond
                                     files={files}
+                                    acceptedFileTypes={["image/*"]}
                                     onupdatefiles={setFiles}
                                     allowMultiple={false}
                                     maxFiles={1}
-                                    server="/api"
-                                    name="files" /* sets the file input name, it's filepond by default */
-                                    labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+                                    server={{process,revert}}
+                                    name="file" /* sets the file input name, it's filepond by default */
+                                    labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
                                 />
 
                                 
-
+{console.log(files,"f")}
                         {/* theme selection */}
                         <div className='flex my-6 justify-between font-bold'><div>Select Theme</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
                         <div className='w-full  flex snap-x space-x-4 px-2  py-2 snap-mandatory overflow-x-auto'>
