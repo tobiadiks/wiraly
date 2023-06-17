@@ -80,14 +80,14 @@ export default function Home() {
                     {/* SideNav*/}
                    <SideNavigation/>
 
-                    {/* preview */}
-                    <div className='w-3/4 p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
-                        {/* theme render */}
+                   {/* preview */}
+                   <div className='lg:w-3/4 w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
+                            {/* theme render */}
 
-                        {currentTheme()}
+                            {currentTheme()}
 
 
-                    </div>
+                        </div>
 
                 </section>
             </main>

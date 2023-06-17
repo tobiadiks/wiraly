@@ -7,17 +7,18 @@ import { useRouter } from 'next/router'
 
 import axios from 'axios'
 import { useEffect } from 'react'
+import useDataFetching from '../../hooks/useDataFetching'
+import useToken from '../../hooks/useToken'
+import BlankLoader from '../../components/loaders/blank'
 
 
 export default function Home() {
     const router = useRouter()
-   
-
-    
-
-    useEffect(() => {
-        // getUserProduct()
+    const { token } = useToken()
+    const { loading, data, error } = useDataFetching('http://localhost:3001/api/products', {
+        headers: { 'Authorization': 'Bearer ' + token }
     })
+    console.log(data)
 
     return (
         <>
@@ -36,33 +37,31 @@ export default function Home() {
                         <SideNavigation />
 
                         {/* preview */}
-                        <div className='lg:w-3/4 w-full p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
-                            {/* products */}
-
-                            <section>
-                                <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Product</div><div><PrimaryButton type={'button'} onclick={() => router.push('/product/new')} full text='Add Product' /></div></div>
-                                <div className='flex my-6 font-bold'><div className='font-bold'>Filter By</div>
-                                    <select className='ml-6'>
-                                        <option className='text-yellow-400'>All Product</option>
-                                        <option className='text-yellow-400'>Published</option>
-                                        <option className='text-yellow-400'>Archived</option>
-                                    </select>
-                                </div>
-                                <div className='w-full grid md:grid lg:grid lg:grid-cols-4 md:grid-cols-2 gap-6'>
-                                    {/* product card */}
-                                    <ProductCard />
-                                    <ProductCard />
-                                    <ProductCard />
-                                    <ProductCard />
-                                    <ProductCard />
-                                    <ProductCard />
-                                    <ProductCard />
-                                    <ProductCard />
-
-                                </div>
-                            </section>
-
-                        </div>
+                        
+                            <div className='lg:w-3/4 w-full p-4 bg-white min-h-screen h-screen relative  overflow-y-auto '>
+                                {/* products */}
+                                {loading ?
+                            <BlankLoader /> :
+                                <section>
+                                    <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Product</div><div><PrimaryButton type={'button'} onclick={() => router.push('/product/new')} full text='Add Product' /></div></div>
+                                    <div className='flex my-6 font-bold'><div className='font-bold'>Filter By</div>
+                                        <select className='ml-6'>
+                                            <option className='text-yellow-400'>All Product</option>
+                                            <option className='text-yellow-400'>Published</option>
+                                            <option className='text-yellow-400'>Archived</option>
+                                        </select>
+                                    </div>
+                                    <div className='w-full grid md:grid lg:grid lg:grid-cols-4 md:grid-cols-2 gap-6'>
+                                        {/* product card */}
+                                        {/* <ProductCard name={"Samsung S10"} id={'0l'} price={50000} total={40} sold={32} src={''} /> */}
+                                        {
+                                        data?.map((value)=><ProductCard key={value?.id} id={value?.id} name={value?.name} price={value?.price} total={value?.total} sold={1} src={value?.images[0]} />)
+                                        }
+                                    </div>
+                                </section>
+}
+                            </div>
+                        
 
                     </section>
                 </main>

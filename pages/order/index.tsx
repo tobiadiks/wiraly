@@ -92,9 +92,10 @@ export default function Home() {
                             </div></div>
                             <div className='flex my-6 font-bold'><div className='font-bold'>Filter By</div>
                                 <select className='ml-6'>
-                                    <option className='text-yellow-400'>All Order</option>
+                                    <option  className='text-yellow-400'>All Order</option>
+                                    <option className='text-yellow-400'>New</option>
                                     <option className='text-yellow-400'>In Progress</option>
-                                    <option className='text-yellow-400'>Fulfilled</option>
+                                    <option className='text-yellow-400'>Delivered</option>
                                     <option className='text-yellow-400'>Canceled</option>
                                 </select>
 
@@ -104,18 +105,18 @@ export default function Home() {
                                    
                                 </select>
                             </div>
-                            <div className='grid grid-cols-5  p-2 gap-x-2'>
+                            <div className='grid md:grid-cols-5 grid-cols-4  p-2 gap-x-2'>
                                 <div className='mx-auto my-auto font-bold col-span-2'>Product Name</div>
                                 <div className='mx-auto my-auto font-bold '>Price</div>
                                 {/* <div className='mx-auto my-auto font-bold '>Phone</div> */}
                                 {/* <div className='mx-auto my-auto font-bold '>Destination</div> */}
-                                <div className='mx-auto my-auto font-bold '>Date</div>
+                                <div className='mx-auto my-auto font-bold hidden md:block'>Date</div>
                                 <div className='mx-auto my-auto font-bold '>Status</div>
                             </div>
                             <div className='w-full grid md:grid lg:grid lg:grid-cols-1 md:grid-cols-1 gap-y-6'>
                                 {/* order card */}
-                                <OrderCard/>
-                                <OrderCard/>
+                                <OrderCard id='09'/>
+                                <OrderCard id='099'/>
 
 
                             </div>

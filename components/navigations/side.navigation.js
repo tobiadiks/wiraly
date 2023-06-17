@@ -35,13 +35,13 @@ export default function SideNavigation(){
 
         </div>
 
-        <div onClick={()=> router.push('/customer')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('customer')? 'text-yellow-300':'text-black'} `}>
+        {/* <div onClick={()=> router.push('/customer')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('customer')? 'text-yellow-300':'text-black'} `}>
          <div className='h-4 w-4 mr-2'>
              <FontAwesomeIcon icon={faPeopleGroup}/>
          </div>
          <div>Customer</div>
 
-        </div>
+        </div> */}
 
         <div onClick={()=> router.push('/order')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('order')? 'text-yellow-300':'text-black'} `}>
          <div className='h-4 w-4 mr-2'>
