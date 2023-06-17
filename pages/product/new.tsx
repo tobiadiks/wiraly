@@ -21,7 +21,7 @@ import axios, { formToJSON } from 'axios'
 import useToken from '../../hooks/useToken'
 import { FilePond as IFilePond} from 'react-filepond'
 import { makeDeleteRequest, makeUploadRequest } from '../../cloudinary/cloudinaryHelper'
-import { images } from '../../next.config'
+
 // import { commands } from '@uiw/react-md-editor'
 
 const SimpleMdeReact = dynamic(
@@ -218,7 +218,7 @@ const resetResponse=()=>{
                                 <TextWithTop type={'number'} value={productTotal} onChange={(e) => setProductTotal(Number(e.target.value))} min={1} ring full name='product_total' text={`Total inventory`} />
                                 {/* images */}
                                 <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
-                                <FilePond
+                              <><FilePond
                                     files={files}
                                     acceptedFileTypes={["image/*"]}
                                     onupdatefiles={setFiles}
@@ -226,11 +226,12 @@ const resetResponse=()=>{
                                     maxFiles={1}
                                     server={{process,revert}}
                                     name="file" /* sets the file input name, it's filepond by default */
-                                    labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
+                                    labelIdle='<>Drag & Drop your file or <span class="filepond--label-action">Browse</span></>'
                                 />
+                              </>
 
                                 
-{console.log(files,"f")}
+
                         {/* theme selection */}
                         <div className='flex my-6 justify-between font-bold'><div>Select Theme</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
                         <div className='w-full  flex snap-x space-x-4 px-2  py-2 snap-mandatory overflow-x-auto'>
