@@ -19,6 +19,7 @@ import dynamic from 'next/dynamic'
 import AuthGuard from '../../components/hoc/authGuard'
 import axios, { formToJSON } from 'axios'
 import useToken from '../../hooks/useToken'
+import { FilePond } from 'react-filepond'
 // import { commands } from '@uiw/react-md-editor'
 
 const SimpleMdeReact = dynamic(
@@ -31,7 +32,7 @@ const SimpleMdeReact = dynamic(
 
 export default function Home() {
     const { token, user } = useToken()
-    
+
 
     const defaultName = `
 Apple iPhone 13 PRO - 6GB RAM - 512GB - 5G - Graphite
@@ -58,6 +59,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     const [productPrice, setProductPrice] = useState(100)
     const [productTotal, setProductTotal] = useState(1)
     const [theme, setTheme] = useState('simplewhite')
+    const [files, setFiles] = useState([])
     const [loading, setLoading] = useState(false)
 
     const handleSubmit = async (e) => {
@@ -73,10 +75,11 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         formData.append('images', '');
         formData.append('theme', theme);
         formData.append('user', user?.id);
+        
 
         let data: any = Object.fromEntries(formData.entries())
         data.images = []
-        
+
 
         console.log(data)
         // const json = formToJSON(formData)
@@ -163,56 +166,59 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                                 <TextWithTop type={'number'} value={productTotal} onChange={(e) => setProductTotal(Number(e.target.value))} min={1} ring full name='product_total' text={`Total inventory`} />
                                 {/* images */}
                                 <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
-                                <div className='w-full grid grid-cols-4 gap-4'>
-                                    {/* collection card */}
+                                <FilePond
+                                    files={files}
+                                    onupdatefiles={setFiles}
+                                    allowMultiple={false}
+                                    maxFiles={1}
+                                    server="/api"
+                                    name="files" /* sets the file input name, it's filepond by default */
+                                    labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+                                />
 
-                                    <UploadImagesCard type='Travel' price={145} />
-                                    <UploadImagesCard type='Travel' price={145} />
-                                    <UploadImagesCard type='Travel' price={145} />
-                                    <UploadImagesCard type='Travel' price={145} />
-                                </div>
+                                
 
-                                {/* theme selection */}
-                                <div className='flex my-6 justify-between font-bold'><div>Select Theme</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
-                                <div className='w-full  flex snap-x space-x-4 px-2  py-2 snap-mandatory overflow-x-auto'>
-                                    {/* theme card */}
-                                    <ThemeCard
-                                        id='simplewhite'
-                                        name='Simple White'
-                                        onclick={() => setTheme('simplewhite')}
-                                    />
-                                    <ThemeCard
-                                        id='simpleyellow'
-                                        name='Simple Yellow'
-                                        onclick={() => setTheme('simpleyellow')}
-                                    />
-
-                                </div>
-
-                                <div className='grid grid-cols-2 gap-4 align-baseline'>
-                                    <SecondaryButton disabled={loading} onclick={() => router.push('/product')} type={'button'} full text='Cancel' />
-                                    <PrimaryButton disabled={loading} full text={loading?'Loading':'Publish'} />
-                                </div>
-
-
-
-                            </form>
+                        {/* theme selection */}
+                        <div className='flex my-6 justify-between font-bold'><div>Select Theme</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
+                        <div className='w-full  flex snap-x space-x-4 px-2  py-2 snap-mandatory overflow-x-auto'>
+                            {/* theme card */}
+                            <ThemeCard
+                                id='simplewhite'
+                                name='Simple White'
+                                onclick={() => setTheme('simplewhite')}
+                            />
+                            <ThemeCard
+                                id='simpleyellow'
+                                name='Simple Yellow'
+                                onclick={() => setTheme('simpleyellow')}
+                            />
 
                         </div>
 
-                        {/* preview */}
-                        <div className='lg:w-3/4 w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
-                            {/* theme render */}
-
-                            {currentTheme()}
-
-
+                        <div className='grid grid-cols-2 gap-4 align-baseline'>
+                            <SecondaryButton disabled={loading} onclick={() => router.push('/product')} type={'button'} full text='Cancel' />
+                            <PrimaryButton disabled={loading} full text={loading ? 'Loading' : 'Publish'} />
                         </div>
 
-                    </section>
-                </main>
+
+
+                    </form>
 
             </div>
+
+            {/* preview */}
+            <div className='lg:w-3/4 w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
+                {/* theme render */}
+
+                {currentTheme()}
+
+
+            </div>
+
+        </section >
+                </main >
+
+            </div >
         </>
     )
 }
