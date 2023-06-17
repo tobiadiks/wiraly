@@ -8,6 +8,7 @@ export const makeUploadRequest = ({
   progressCallback,
   successCallback,
   errorCallback,
+  responseCallback
 }) => {
 
   const url = `${baseUrl}/image/upload`;
@@ -25,8 +26,9 @@ export const makeUploadRequest = ({
 
   request.onload = () => {
     if (request.status >= 200 && request.status < 300) {
-      const { delete_token: deleteToken } = JSON.parse(request.response);
-
+      const { delete_token: deleteToken} = JSON.parse(request.response);
+      const response = JSON.parse(request.response);
+      responseCallback(response)
       successCallback(deleteToken);
     } else {
       errorCallback(request.responseText);
@@ -35,15 +37,14 @@ export const makeUploadRequest = ({
 
   request.send(formData);
   
-  return () => {
-    request.abort();
-  };
+  return request
 };
 
 export const makeDeleteRequest = ({
   token,
   successCallback,
   errorCallback,
+  responseCallback
 }) => {
 
   const url = `${baseUrl}/delete_by_token`;
