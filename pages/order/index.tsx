@@ -18,6 +18,8 @@ import SimpleWhiteTheme from '../../components/themes/simple_white'
 import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import SideNavigation from '../../components/navigations/side.navigation'
 import OrderCard from '../../components/cards/order.card'
+import { useRouter } from 'next/router'
+import MobileNavigation from '../../components/navigations/mobile.navigation'
 
 
 export default function Home() {
@@ -35,6 +37,7 @@ export default function Home() {
     const [productPrice, setProductPrice] = useState(100)
     const [theme, setTheme] = useState('simplewhite')
 
+    const router= useRouter()
     // Theme Handler
     const currentTheme = () => {
         switch (theme) {
@@ -80,16 +83,15 @@ export default function Home() {
                 <section className='mt-14 max-h-screen flex'>
                     {/* SideNav*/}
                     <SideNavigation />
-
+                    <MobileNavigation />
                     {/* preview */}
 
-                    <div className='w-full p-4 bg-white min-h-screen h-screen  overflow-y-auto '>
+                    <div className='lg:w-3/4 w-full p-4 bg-white min-h-screen h-screen relative  overflow-y-auto '>
                         {/* products */}
 
-                        <section>
-                            <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Order</div><div>
-                                {/* <PrimaryButton type={'button'} onclick={()=>router.push('/product/new')} full text='Add Product' /> */}
-                            </div></div>
+                        <section >
+                            <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Order</div><div></div></div>
+                            <div className='max-w-full overflow-x-auto px-2 py-2'>
                             <div className='flex my-6 font-bold'><div className='font-bold'>Filter By</div>
                                 <select className='ml-6'>
                                     <option  className='text-yellow-400'>All Order</option>
@@ -117,8 +119,7 @@ export default function Home() {
                                 {/* order card */}
                                 <OrderCard id='09'/>
                                 <OrderCard id='099'/>
-
-
+                            </div>
                             </div>
                         </section>
 

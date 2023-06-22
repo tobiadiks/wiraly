@@ -21,7 +21,7 @@ export default function HeaderNavigation() {
 
     const router = useRouter()
     return (
-        <nav className='w-full z-50 py-4 px-4 bg-yellow-50 border-b border-b-gray-100 flex fixed top-0 justify-between ' >
+        <nav className='w-full z-50 py-4 px-4 bg-gray-900 border-b border-b-gray-100 flex fixed top-0 justify-between ' >
             <div onClick={() => { token ? router.push("/dashboard") : router.push("/") }} className='text-yellow-300 cursor-pointer my-auto font-bold' > Seltra </div>
             
             {token ?
@@ -31,15 +31,15 @@ export default function HeaderNavigation() {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img alt={''} className='h-8 w-8 rounded-full my-auto mr-2' src={user?.logo} />
                     :
-                    <FontAwesomeIcon className='h-4 w-4 rounded-full my-auto mr-2' icon={faUser}/>
+                    <FontAwesomeIcon className='h-4 w-4 text-white rounded-full my-auto mr-2' icon={faUser}/>
                     }
-                    <div className='h-4 w-fit my-auto cursor-pointer' onClick={() => signOut()}>
+                    <div className='h-4 w-fit text-white my-auto cursor-pointer' onClick={() => signOut()}>
                         Logout
                     </div>
                 </div>
                 :
                 <div className='flex h-8 w-8'>
-                    <div className='h-4 w-fit my-auto cursor-pointer' onClick={() => signIn()}>
+                    <div className='h-4 w-fit text-white my-auto cursor-pointer' onClick={() => signIn()}>
                         Login
                     </div>
                 </div>

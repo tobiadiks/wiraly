@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import useDataFetching from '../../hooks/useDataFetching'
 import useToken from '../../hooks/useToken'
 import BlankLoader from '../../components/loaders/blank'
+import MobileNavigation from '../../components/navigations/mobile.navigation'
 
 
 export default function Home() {
@@ -35,12 +36,13 @@ export default function Home() {
                     <section className='mt-14 max-h-screen flex'>
                         {/* SideNav*/}
                         <SideNavigation />
+                        <MobileNavigation />
 
                         {/* preview */}
                         
                             <div className='lg:w-3/4 w-full p-4 bg-white min-h-screen h-screen relative  overflow-y-auto '>
                                 {/* products */}
-                                {loading ?
+                                {loading && !error ?
                             <BlankLoader /> :
                                 <section>
                                     <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Product</div><div><PrimaryButton type={'button'} onclick={() => router.push('/product/new')} full text='Add Product' /></div></div>

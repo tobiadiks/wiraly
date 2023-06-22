@@ -17,6 +17,7 @@ import TextWithTop from '../../components/textboxes/textwithtop.textbox'
 import SimpleWhiteTheme from '../../components/themes/simple_white'
 import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import SideNavigation from '../../components/navigations/side.navigation'
+import MobileNavigation from '../../components/navigations/mobile.navigation'
 
 
 export default function Home() {
@@ -76,18 +77,18 @@ export default function Home() {
             <HeaderNavigation />
 
             <main className=' flex  flex-col   w-full'>
-                <section className='mt-14 max-h-screen flex'>
+                <section className='mt-14 max-h-screen flex w-full'>
                     {/* SideNav*/}
-                   <SideNavigation/>
+                    <SideNavigation />
+                    <MobileNavigation />
+                    {/* preview */}
+                    <div className='lg:w-3/4 w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
+                        {/* theme render */}
 
-                   {/* preview */}
-                   <div className='lg:w-3/4 w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
-                            {/* theme render */}
-
-                            {currentTheme()}
+                        {currentTheme()}
 
 
-                        </div>
+                    </div>
 
                 </section>
             </main>

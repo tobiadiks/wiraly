@@ -7,7 +7,7 @@ import TextWithTop from "../../components/textboxes/textwithtop.textbox";
 import axios, { formToJSON } from 'axios';
 import useToken from '../../hooks/useToken';
 import { useRouter } from 'next/router';
-export default function LogIn() {
+export default function Signup() {
 
     const { data: user } = { data: false };
     const [password, setPassword] = useState('');
@@ -27,7 +27,7 @@ export default function LogIn() {
         const json = formToJSON(formData)
         try {
             // Send a POST request to the API route
-            const response = await axios.post('http://localhost:3001/api/auth/login', json,)
+            const response = await axios.post('http://localhost:3001/api/auth/signup', json,)
 
 
             if (response.status == 201) {
@@ -68,7 +68,7 @@ export default function LogIn() {
                         {user ?
                             <div className='w-fit mx-auto my-4 text-center'>You have signed in already.</div>
                             :
-                            <div className='w-fit mx-auto my-4 text-center'>Choose an account to sign in with.</div>
+                            <div className='w-fit mx-auto my-4 text-center'>Create an account to sign up with.</div>
                         }
 
                         <form onSubmit={handleSubmit} className='mx-auto my-6 space-y-4 items-center  w-full md:w-1/2 lg:w-1/3 flex-col flex'>
@@ -76,8 +76,8 @@ export default function LogIn() {
 
                             <TextWithTop disabled={loading} required full ring rounded text={"Email"} value={email} onChange={(e) => setEmail(e.target.value)} />
                             <TextWithTop disabled={loading} required type={"password"} full ring rounded text={"Password"} value={password} onChange={(e) => setPassword(e.target.value)} />
-                            <PrimaryButton disabled={loading || !email?.length || !password?.length} type='submit' full ring rounded text={loading ? 'Loading...' : 'Login'} />
-                            <SecondaryButton onclick={()=>router.push('/auth/signup')} disabled={loading} type='button' full ring rounded text={'Signup'} />
+                            <PrimaryButton disabled={loading || !email?.length || !password?.length} type='submit' full ring rounded text={loading ? 'Loading...' : 'Signup'} />
+                            <SecondaryButton onclick={()=>router.push('/auth/login')} disabled={loading} type='button' full ring rounded text={'Login'} />
                             <div className='font-bold text-center w-fit text-sm mx-auto cursor-pointer'>By Continuing, you agree to our <span className='underline cursor-pointer'>Terms and Condition</span>,<span className='underline'>Privacy Policy</span></div>
                         </form>
 
