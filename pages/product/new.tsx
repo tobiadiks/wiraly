@@ -202,7 +202,7 @@ const resetResponse=()=>{
                 <main className=' flex  flex-col   w-full'>
                     <section className='pt-12 max-h-screen flex'>
                         {/* editor */}
-                        <div className='lg:w-1/4 hidden md:block w-0 p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
+                        <div className='lg:w-1/4 w-full hidden md:block p-4 bg-white min-h-screen h-screen static  overflow-y-auto border-r'>
                             <div className=' text-3xl md:text-2xl'>Add New <span className='font-bold'>Product</span></div>
                             <div className=' text-xs md:text-sm'>Add some information for the product you want to create</div>
                             {/* form */}
@@ -261,7 +261,7 @@ const resetResponse=()=>{
             </div>
 
             {/* preview */}
-            <div className='lg:w-3/4 w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
+            <div className='lg:w-3/4 w-0  bg-white min-h-screen h-screen  overflow-y-auto '>
                 {/* theme render */}
 
                 {currentTheme()}
