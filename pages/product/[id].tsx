@@ -21,6 +21,8 @@ import axios, { formToJSON } from 'axios'
 import useToken from '../../hooks/useToken'
 import useDataFetching from '../../hooks/useDataFetching'
 import BlankLoader from '../../components/loaders/blank'
+import { FilePond as IFilePond} from 'react-filepond'
+import { makeDeleteRequest, makeUploadRequest } from '../../cloudinary/cloudinaryHelper'
 // import { commands } from '@uiw/react-md-editor'
 
 const SimpleMdeReact = dynamic(
@@ -62,6 +64,8 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     const [productPrice, setProductPrice] = useState(0)
     const [productTotal, setProductTotal] = useState(0)
     const [theme, setTheme] = useState('')
+    const [files, setFiles] = useState([])
+    const [image, setImage] = useState('')
     const [loading, setLoading] = useState(false)
 
     const { loading: loadingGetApi, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products/' + router.query.id, {
@@ -76,7 +80,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
             setProductTotal(data?.total)
             setTheme(data?.theme)  
           }
-    },[data, loadingGetApi])
+    },[data, loadingGetApi, error])
    
     
 
@@ -95,7 +99,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         
 
         let data: any = Object.fromEntries(formData.entries())
-        data.images = []
+        data.images = [image]
 
 
         console.log(data)
@@ -136,6 +140,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     product_name={productName}
                     product_description={productDescription}
                     product_price={productPrice}
+                    product_image={image}
                 />
 
 
@@ -144,7 +149,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     product_name={productName}
                     product_description={productDescription}
                     product_price={productPrice}
-
+                    product_image={image}
                 />
 
         }
@@ -152,7 +157,53 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     }
 
     // End of theme Handler
+    const revert = (token, successCallback, errorCallback) => {
+        makeDeleteRequest({
+          token,
+          successCallback,
+          errorCallback,
+          responseCallback:resetResponse
+        });
+      };
 
+      const process = async (
+        fieldName,
+          file,
+          metadata,
+          load,
+          error,
+          progress,
+          abort,
+          transfer,
+          options
+        ) => {
+          const abortRequest = makeUploadRequest({
+            file,
+            fieldName,
+            successCallback: load,
+            errorCallback: error,
+            progressCallback: progress,
+            responseCallback:handleResponse
+          });
+          
+          return {
+            abort: () => {
+              abortRequest.abort();
+              abort();
+            },
+          };
+        };
+
+const handleResponse=(response)=>{
+    setImage(response?.secure_url)
+}
+
+const resetResponse=()=>{
+    setImage('')
+}
+
+      // Hackishly cast FilePond as any
+    const FilePond: any = IFilePond
     return (
         <>
             <div className='bg-white min-h-screen'>
@@ -189,10 +240,16 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                                 <div className='w-full grid grid-cols-4 gap-4'>
                                     {/* collection card */}
 
-                                    <UploadImagesCard type='Travel' price={145} />
-                                    <UploadImagesCard type='Travel' price={145} />
-                                    <UploadImagesCard type='Travel' price={145} />
-                                    <UploadImagesCard type='Travel' price={145} />
+                                    <><FilePond
+                                    files={files}
+                                    acceptedFileTypes={["image/*"]}
+                                    onupdatefiles={setFiles}
+                                    allowMultiple={false}
+                                    maxFiles={1}
+                                    server={{process,revert}}
+                                    name="file" /* sets the file input name, it's filepond by default */
+                                    labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
+                                /></>
                                 </div>
 
                                 {/* theme selection */}

@@ -226,7 +226,7 @@ const resetResponse=()=>{
                                     maxFiles={1}
                                     server={{process,revert}}
                                     name="file" /* sets the file input name, it's filepond by default */
-                                    labelIdle='<>Drag & Drop your file or <span class="filepond--label-action">Browse</span></>'
+                                    labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
                                 />
                               </>
 
