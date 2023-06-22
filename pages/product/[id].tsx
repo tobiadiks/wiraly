@@ -237,7 +237,7 @@ const resetResponse=()=>{
                                 <TextWithTop type={'number'} value={productTotal} onChange={(e) => setProductTotal(Number(e.target.value))} min={1} ring full name='product_total' text={`Total inventory`} />
                                 {/* images */}
                                 <div className='flex my-6 justify-between font-bold'><div>Upload Images</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
-                                <div className='w-full grid grid-cols-4 gap-4'>
+
                                     {/* collection card */}
 
                                     <><FilePond
@@ -250,7 +250,7 @@ const resetResponse=()=>{
                                     name="file" /* sets the file input name, it's filepond by default */
                                     labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
                                 /></>
-                                </div>
+                                
 
                                 {/* theme selection */}
                                 <div className='flex my-6 justify-between font-bold'><div>Select Theme</div><div className='pb-1 border-b-yellow-300 border-b-2'></div></div>
