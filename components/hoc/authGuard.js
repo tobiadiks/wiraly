@@ -6,8 +6,8 @@ import useToken from "../../hooks/useToken";
 export default function AuthGuard({children}){
   const router = useRouter();
   const [authorized, setAuthorized]= useState(false);
-  // const {token}= useToken()
-  let token="j"
+  const {token}= useToken()
+  
   
   useEffect(()=> {
     // on initial load - run auth check
