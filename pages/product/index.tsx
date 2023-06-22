@@ -16,7 +16,7 @@ import MobileNavigation from '../../components/navigations/mobile.navigation'
 export default function Home() {
     const router = useRouter()
     const { token } = useToken()
-    const { loading, data, error } = useDataFetching('http://localhost:3001/api/products', {
+    const { loading, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products', {
         headers: { 'Authorization': 'Bearer ' + token }
     })
     console.log(data)

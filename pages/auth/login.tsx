@@ -27,7 +27,7 @@ export default function LogIn() {
         const json = formToJSON(formData)
         try {
             // Send a POST request to the API route
-            const response = await axios.post('http://localhost:3001/api/auth/login', json,)
+            const response = await axios.post('https://brainy-puce-pigeon.cyclic.app/api/auth/login', json,)
 
 
             if (response.status == 201) {
