@@ -64,7 +64,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     const [theme, setTheme] = useState('')
     const [loading, setLoading] = useState(false)
 
-    const { loading: loadingGetApi, data, error } = useDataFetching('http://localhost:3001/api/products/' + router.query.id, {
+    const { loading: loadingGetApi, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products/' + router.query.id, {
         headers: { 'Authorization': 'Bearer ' + token }
     })
 
