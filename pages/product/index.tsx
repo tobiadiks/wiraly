@@ -25,14 +25,17 @@ export default function Home() {
         {
             name: 'Name',
             selector: row => row.name,
+            sortable: true,
         },
         {
             name: 'Price',
             selector: row => row.price,
+            sortable: true,
         },
         {
             name: 'Total',
-            selector: row => row.total
+            selector: row => row.total,
+            sortable: true,
         },
         {
             name: 'Link',
@@ -40,14 +43,14 @@ export default function Home() {
         },
         {
 
-            cell: () => <div onClick={null}>Edit</div>,
+            cell: () => <div className='cursor-pointer' onClick={null}>Edit</div>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
         },
         {
 
-            cell: () => <div className='text-red-500' onClick={null}>Delete</div>,
+            cell: () => <div className='text-red-500 cursor-pointer' onClick={null}>Delete</div>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
