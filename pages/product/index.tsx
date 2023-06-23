@@ -12,6 +12,7 @@ import useToken from '../../hooks/useToken'
 import BlankLoader from '../../components/loaders/blank'
 import MobileNavigation from '../../components/navigations/mobile.navigation'
 
+import DataTable from 'react-data-table-component';
 
 export default function Home() {
     const router = useRouter()
@@ -20,6 +21,24 @@ export default function Home() {
         headers: { 'Authorization': 'Bearer ' + token }
     })
     console.log(data)
+    const columns = [
+        {
+            name: 'Name',
+            selector: row => row.name,
+        },
+        {
+            name: 'Price',
+            selector: row => row.price,
+        },
+        {
+            name: 'Total',
+            selector: row => row.total
+        },
+        {
+            name: 'Link',
+            selector: row => row.short_url
+        }
+    ];
 
     return (
         <>
@@ -39,11 +58,11 @@ export default function Home() {
                         <MobileNavigation />
 
                         {/* preview */}
-                        
-                            <div className='lg:w-3/4 w-full p-4 bg-white min-h-screen h-screen relative  overflow-y-auto '>
-                                {/* products */}
-                                {loading && !error ?
-                            <BlankLoader /> :
+
+                        <div className='lg:w-3/4 w-full p-4 bg-white min-h-screen h-screen relative  overflow-y-auto '>
+                            {/* products */}
+                            {loading && !error ?
+                                <BlankLoader /> :
                                 <section>
                                     <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Product</div><div><PrimaryButton type={'button'} onclick={() => router.push('/product/new')} full text='Add Product' /></div></div>
                                     <div className='flex my-6 font-bold'><div className='font-bold'>Filter By</div>
@@ -53,17 +72,23 @@ export default function Home() {
                                             <option className='text-yellow-400'>Archived</option>
                                         </select>
                                     </div>
-                                    <div className='w-full grid md:grid lg:grid lg:grid-cols-4 md:grid-cols-2 gap-6'>
+                                    <div className='w-full  '>
                                         {/* product card */}
-                                        {/* <ProductCard name={"Samsung S10"} id={'0l'} price={50000} total={40} sold={32} src={''} /> */}
+                                        <DataTable
+                                            columns={columns}
+                                            data={data || []}
+                                            responsive
+                                            striped
+                                            
+                                        />
                                         {
-                                        data?.map((value)=><ProductCard key={value?.id} id={value?.id} name={value?.name} price={value?.price} total={value?.total} sold={1} src={value?.images[0]} />)
+                                            data?.map((value) => <ProductCard key={value?.id} id={value?.id} name={value?.name} price={value?.price} total={value?.total} sold={1} src={value?.images[0]} />)
                                         }
                                     </div>
                                 </section>
-}
-                            </div>
-                        
+                            }
+                        </div>
+
 
                     </section>
                 </main>
