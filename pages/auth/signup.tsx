@@ -84,10 +84,10 @@ export default function Signup() {
                         <form onSubmit={handleSubmit} className='mx-auto my-6 space-y-4 items-center  w-full md:w-1/2 lg:w-1/3 flex-col flex'>
                             {/*  <div className='font-bold text-center w-fit mx-auto'>it&apos;s for free!</div> */}
                             <TextWithTop disabled={loading} required full ring rounded text={"Business Name"} value={name} onChange={(e) => setName(e.target.value)} />
-                            <TextWithTop disabled={loading} required full ring rounded text={"Username"} value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <TextWithTop disabled={loading} required full ring rounded text={"Username"} value={username}  onChange={(e) => setUsername(e.target.value.toLowerCase())} />
                             
-                            <TextWithTop disabled={loading} required full ring rounded text={"Email"} value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <TextWithTop disabled={loading} required full ring rounded text={"Email"} value={phone} onChange={(e) => setPhone(e.target.value)} />
+                            <TextWithTop disabled={loading} required full ring rounded text={"Email"} type={'email'} value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <TextWithTop disabled={loading} required full ring rounded text={"Phone"} type={'tel'} value={phone} onChange={(e) => setPhone(e.target.value)} />
                             <TextWithTop disabled={loading} required type={"password"} full ring rounded text={"Password"} value={password} onChange={(e) => setPassword(e.target.value)} />
                             
                             <PrimaryButton disabled={loading || !email?.length || !password?.length} type='submit' full ring rounded text={loading ? 'Loading...' : 'Signup'} />
