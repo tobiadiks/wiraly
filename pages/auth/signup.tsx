@@ -16,6 +16,7 @@ export default function Signup() {
     const [username, setUsername] = useState('');
     const [address, setAddress] = useState('');
     const [logo, setLogo] = useState('');
+    const [phone, setPhone] = useState('');
     const [loading, setLoading] = useState(false)
     const { token, setToken } = useToken()
     const router = useRouter()
@@ -31,6 +32,7 @@ export default function Signup() {
         formData.append('name', name);
         formData.append('username', username);
         formData.append('address', address);
+        formData.append('phone', phone);
         formData.append('logo', logo);
         const json = formToJSON(formData)
         try {
@@ -85,6 +87,7 @@ export default function Signup() {
                             <TextWithTop disabled={loading} required full ring rounded text={"Username"} value={username} onChange={(e) => setUsername(e.target.value)} />
                             
                             <TextWithTop disabled={loading} required full ring rounded text={"Email"} value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <TextWithTop disabled={loading} required full ring rounded text={"Email"} value={phone} onChange={(e) => setPhone(e.target.value)} />
                             <TextWithTop disabled={loading} required type={"password"} full ring rounded text={"Password"} value={password} onChange={(e) => setPassword(e.target.value)} />
                             
                             <PrimaryButton disabled={loading || !email?.length || !password?.length} type='submit' full ring rounded text={loading ? 'Loading...' : 'Signup'} />
