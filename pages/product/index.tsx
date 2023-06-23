@@ -43,7 +43,7 @@ export default function Home() {
         },
         {
 
-            cell: () => <div className='cursor-pointer' onClick={null}>Edit</div>,
+            cell: row => <div className='cursor-pointer' onClick={()=>router.push(`/product/${row.id}`)}>Edit</div>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
