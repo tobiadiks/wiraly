@@ -5,12 +5,21 @@ import Image from 'next/image'
 import HeaderNavigation from '../../components/navigations/header.navigations'
 import { useRouter } from 'next/router'
 import PrimaryButton from '../../components/buttons/primary.button'
+import useToken from '../../hooks/useToken'
+import { useEffect } from 'react'
 
 export default function UnauthNotificationPage() {
   const router = useRouter()
   const signIn=()=>{
     router.push('/auth/login')
 }
+
+const {token}= useToken()
+useEffect(()=>{
+  if(token){
+    router.push('/dashboard')
+  }
+},[router, token])
   return (
     <div>
       <Head>
