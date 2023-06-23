@@ -35,7 +35,7 @@ export default function Signup() {
         const json = formToJSON(formData)
         try {
             // Send a POST request to the API route
-            const response = await axios.post('https://brainy-puce-pigeon.cyclic.app/api/auth/signup', json,)
+            const response = await axios.post('https://brainy-puce-pigeon.cyclic.app/api/auth/register', json,)
 
 
             if (response.status == 201) {
