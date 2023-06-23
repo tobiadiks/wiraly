@@ -57,6 +57,13 @@ export default function Home() {
         },
     ];
 
+    const paginationComponentOptions = {
+        rowsPerPageText: 'Products per page',
+        rangeSeparatorText: 'of',
+        selectAllRowsItem: true,
+        selectAllRowsItemText: 'All',
+    };
+
     return (
         <>
             <div className='bg-white  min-h-screen'>
@@ -96,7 +103,8 @@ export default function Home() {
                                             data={data || []}
                                             responsive
                                             striped
-
+                                            pagination
+                                            paginationComponentOptions={paginationComponentOptions}
                                         />
 
                                     </div>
