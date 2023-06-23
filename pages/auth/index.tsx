@@ -15,11 +15,7 @@ export default function UnauthNotificationPage() {
 }
 
 const {token}= useToken()
-useEffect(()=>{
-  if(token){
-    router.push('/dashboard')
-  }
-},[router, token])
+
   return (
     <div>
       <Head>
