@@ -12,6 +12,10 @@ export default function Signup() {
     const { data: user } = { data: false };
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
+    const [address, setAddress] = useState('');
+    const [logo, setLogo] = useState('');
     const [loading, setLoading] = useState(false)
     const { token, setToken } = useToken()
     const router = useRouter()
@@ -24,6 +28,10 @@ export default function Signup() {
         const formData = new FormData();
         formData.append('password', password);
         formData.append('email', email);
+        formData.append('name', name);
+        formData.append('username', username);
+        formData.append('address', address);
+        formData.append('logo', logo);
         const json = formToJSON(formData)
         try {
             // Send a POST request to the API route
@@ -73,9 +81,12 @@ export default function Signup() {
 
                         <form onSubmit={handleSubmit} className='mx-auto my-6 space-y-4 items-center  w-full md:w-1/2 lg:w-1/3 flex-col flex'>
                             {/*  <div className='font-bold text-center w-fit mx-auto'>it&apos;s for free!</div> */}
-
+                            <TextWithTop disabled={loading} required full ring rounded text={"Email"} value={name} onChange={(e) => setName(e.target.value)} />
+                            <TextWithTop disabled={loading} required full ring rounded text={"Email"} value={username} onChange={(e) => setUsername(e.target.value)} />
+                            
                             <TextWithTop disabled={loading} required full ring rounded text={"Email"} value={email} onChange={(e) => setEmail(e.target.value)} />
                             <TextWithTop disabled={loading} required type={"password"} full ring rounded text={"Password"} value={password} onChange={(e) => setPassword(e.target.value)} />
+                            
                             <PrimaryButton disabled={loading || !email?.length || !password?.length} type='submit' full ring rounded text={loading ? 'Loading...' : 'Signup'} />
                             <SecondaryButton onclick={()=>router.push('/auth/login')} disabled={loading} type='button' full ring rounded text={'Login'} />
                             <div className='font-bold text-center w-fit text-sm mx-auto cursor-pointer'>By Continuing, you agree to our <span className='underline cursor-pointer'>Terms and Condition</span>,<span className='underline'>Privacy Policy</span></div>
