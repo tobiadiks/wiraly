@@ -17,10 +17,38 @@ import DataTable from 'react-data-table-component';
 export default function Home() {
     const router = useRouter()
     const { token } = useToken()
+    
     const { loading, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products', {
         headers: { 'Authorization': 'Bearer ' + token }
     })
     console.log(data)
+    const handleDelete = async (id) => {
+        
+
+        
+        // const json = formToJSON(formData)
+        // Send a DELETE request to the API route
+        const response = await axios.delete('https://brainy-puce-pigeon.cyclic.app/api/products', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+
+
+        if (response.status == 201) {
+            // Form submitted successfully
+            const data = await response.data;
+            console.log(data);
+            
+            await router.reload()
+            
+        } else {
+            // Form submission failed
+            console.error('Form submission failed');
+            
+        }
+        
+    };
     const columns = [
         {
             name: 'Name',
@@ -39,18 +67,23 @@ export default function Home() {
         },
         {
             name: 'Link',
-            selector: row => row.short_url
+            selector: row => row.short_url,
+            cell: row => (
+                <a className=' visited:text-yellow-400 default:text-yellow-400' href={`https://seltra.vercel.app/buy?product=${row.short_url}`} target="_blank" rel="noopener noreferrer">
+                    https://seltra.vercel.app/buy?product={row.short_url}
+                </a>
+            ),
         },
         {
 
-            cell: row => <div className='cursor-pointer' onClick={()=>router.push(`/product/${row.id}`)}>Edit</div>,
+            cell: row => <div className='cursor-pointer' onClick={() => router.push(`/product/${row.id}`)}>Edit</div>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
         },
         {
 
-            cell: () => <div className='text-red-500 cursor-pointer' onClick={null}>Delete</div>,
+            cell: (row) => <div className='text-red-500 cursor-pointer' onClick={()=>handleDelete(row.id)}>Delete</div>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
@@ -63,6 +96,8 @@ export default function Home() {
         selectAllRowsItem: true,
         selectAllRowsItemText: 'All',
     };
+
+    
 
     return (
         <>
