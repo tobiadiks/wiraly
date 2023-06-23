@@ -44,7 +44,7 @@ export default function Signup() {
                 console.log(data);
                 setToken(data)
                 // setLoading(false)
-                await router.push('/dashboard')
+                await router.push('/auth/login')
             }
 
             else {
