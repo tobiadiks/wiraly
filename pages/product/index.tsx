@@ -37,7 +37,21 @@ export default function Home() {
         {
             name: 'Link',
             selector: row => row.short_url
-        }
+        },
+        {
+
+            cell: () => <div onClick={null}>Edit</div>,
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
+        },
+        {
+
+            cell: () => <div className='text-red-500' onClick={null}>Delete</div>,
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
+        },
     ];
 
     return (
@@ -79,11 +93,9 @@ export default function Home() {
                                             data={data || []}
                                             responsive
                                             striped
-                                            
+
                                         />
-                                        {
-                                            data?.map((value) => <ProductCard key={value?.id} id={value?.id} name={value?.name} price={value?.price} total={value?.total} sold={1} src={value?.images[0]} />)
-                                        }
+
                                     </div>
                                 </section>
                             }
