@@ -23,6 +23,7 @@ import useDataFetching from '../../hooks/useDataFetching'
 import BlankLoader from '../../components/loaders/blank'
 import { FilePond as IFilePond} from 'react-filepond'
 import { makeDeleteRequest, makeUploadRequest } from '../../cloudinary/cloudinaryHelper'
+import {useNotifications} from 'reapop'
 // import { commands } from '@uiw/react-md-editor'
 
 const SimpleMdeReact = dynamic(
@@ -35,7 +36,7 @@ const SimpleMdeReact = dynamic(
 
 export default function Home() {
     const { token, user } = useToken()
-
+const {notify}= useNotifications()
 
     const defaultName = `
 Apple iPhone 13 PRO - 6GB RAM - 512GB - 5G - Graphite
@@ -117,11 +118,13 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
             // Form submitted successfully
             const data = await response.data;
             console.log(data);
+            notify('Successful','success')
             setLoading(false)
             await router.push('/product')
         } else {
             // Form submission failed
             console.error('Form submission failed');
+            notify('Failed','error')
             setLoading(false)
         }
         setLoading(false)

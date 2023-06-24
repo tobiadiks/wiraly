@@ -7,7 +7,10 @@ import TextWithTop from "../../components/textboxes/textwithtop.textbox";
 import axios, { formToJSON } from 'axios';
 import useToken from '../../hooks/useToken';
 import { useRouter } from 'next/router';
+import {useNotifications} from 'reapop'
+
 export default function LogIn() {
+    const {notify} = useNotifications()
 
     const { data: user } = { data: false };
     const [password, setPassword] = useState('');
@@ -34,6 +37,7 @@ export default function LogIn() {
                 // Form submitted successfully
                 const data = await response.data;
                 console.log(data);
+                notify('Login Successful','success')
                 setToken(data)
                 // setLoading(false)
                 await router.push('/dashboard')
@@ -42,11 +46,13 @@ export default function LogIn() {
             else {
                 // Form submission failed
                 console.error('Form submission failed');
+                notify('Form submission failed','error')
                 setLoading(false)
             }
 
         } catch (error) {
             console.error('Something went wrong');
+            notify('Something went wrong','error')
             setLoading(false)
         }
     }

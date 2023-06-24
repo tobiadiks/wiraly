@@ -7,6 +7,7 @@ import TextWithTop from "../../components/textboxes/textwithtop.textbox";
 import axios, { formToJSON } from 'axios';
 import useToken from '../../hooks/useToken';
 import { useRouter } from 'next/router';
+import {useNotifications} from 'reapop'
 export default function Signup() {
 
     const { data: user } = { data: false };
@@ -20,6 +21,7 @@ export default function Signup() {
     const [loading, setLoading] = useState(false)
     const { token, setToken } = useToken()
     const router = useRouter()
+    const{notify}= useNotifications()
 
 
     const handleSubmit = async (e) => {
@@ -44,6 +46,7 @@ export default function Signup() {
                 // Form submitted successfully
                 const data = await response.data;
                 console.log(data);
+                notify('Signup Successful','success')
                 setToken(data)
                 // setLoading(false)
                 await router.push('/auth/login')
@@ -52,11 +55,13 @@ export default function Signup() {
             else {
                 // Form submission failed
                 console.error('Form submission failed');
+                notify('Form submission failed','error')
                 setLoading(false)
             }
 
         } catch (error) {
             console.error('Something went wrong');
+            notify('Something went wrong','error')
             setLoading(false)
         }
     }

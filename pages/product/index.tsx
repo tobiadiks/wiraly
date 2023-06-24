@@ -11,12 +11,13 @@ import useDataFetching from '../../hooks/useDataFetching'
 import useToken from '../../hooks/useToken'
 import BlankLoader from '../../components/loaders/blank'
 import MobileNavigation from '../../components/navigations/mobile.navigation'
-
+import {useNotifications} from 'reapop'
 import DataTable from 'react-data-table-component';
 
 export default function Home() {
     const router = useRouter()
     const { token } = useToken()
+    const {notify}= useNotifications()
     
     const { loading, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products', {
         headers: { 'Authorization': 'Bearer ' + token }
@@ -35,16 +36,17 @@ export default function Home() {
         })
 
 
-        if (response.status == 201) {
+        if (response.status >= 200 || response.status <= 300) {
             // Form submitted successfully
             const data = await response.data;
             console.log(data);
-            
+            notify('Deleted','success')
             await router.reload()
             
         } else {
             // Form submission failed
             console.error('Form submission failed');
+            notify('Something went wrong','error')
             
         }
         
