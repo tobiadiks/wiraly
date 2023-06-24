@@ -11,13 +11,13 @@ import useDataFetching from '../../hooks/useDataFetching'
 import useToken from '../../hooks/useToken'
 import BlankLoader from '../../components/loaders/blank'
 import MobileNavigation from '../../components/navigations/mobile.navigation'
-import {useNotifications} from 'reapop'
-import DataTable from 'react-data-table-component';
 
+import DataTable from 'react-data-table-component';
+import NotificationsSystem, {wyboTheme, useNotifications} from 'reapop'
 export default function Home() {
     const router = useRouter()
     const { token } = useToken()
-    const {notify}= useNotifications()
+    const {notify,notifications,dismissNotification} = useNotifications()
     
     const { loading, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products', {
         headers: { 'Authorization': 'Bearer ' + token }
@@ -111,7 +111,14 @@ export default function Home() {
                 </Head>
                 {/* nav header */}
                 <HeaderNavigation />
-
+                <NotificationsSystem
+                // 2. Pass the notifications you want Reapop to display.
+                notifications={notifications}
+                // 3. Pass the function used to dismiss a notification.
+                dismissNotification={(id) => dismissNotification(id)}
+                // 4. Pass a builtIn theme or a custom theme.
+                theme={wyboTheme}
+            />
                 <main className=' flex  flex-col   w-full'>
                     <section className='mt-14 max-h-screen flex'>
                         {/* SideNav*/}

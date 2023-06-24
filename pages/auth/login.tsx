@@ -7,10 +7,10 @@ import TextWithTop from "../../components/textboxes/textwithtop.textbox";
 import axios, { formToJSON } from 'axios';
 import useToken from '../../hooks/useToken';
 import { useRouter } from 'next/router';
-import {useNotifications} from 'reapop'
+import NotificationsSystem, {wyboTheme, useNotifications} from 'reapop'
 
 export default function LogIn() {
-    const {notify} = useNotifications()
+    const {notify,notifications,dismissNotification} = useNotifications()
 
     const { data: user } = { data: false };
     const [password, setPassword] = useState('');
@@ -67,7 +67,14 @@ export default function LogIn() {
                 </Head>
                 {/* nav header */}
                 <HeaderNavigation />
-
+                <NotificationsSystem
+                // 2. Pass the notifications you want Reapop to display.
+                notifications={notifications}
+                // 3. Pass the function used to dismiss a notification.
+                dismissNotification={(id) => dismissNotification(id)}
+                // 4. Pass a builtIn theme or a custom theme.
+                theme={wyboTheme}
+            />
                 <main className='my-24 flex flex-col w-full '>
                     <section className='px-4'>
                         <div className=' text-3xl md:text-5xl text-center font-bold'>Let&apos;s get you started</div>

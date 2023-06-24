@@ -23,7 +23,7 @@ import useDataFetching from '../../hooks/useDataFetching'
 import BlankLoader from '../../components/loaders/blank'
 import { FilePond as IFilePond} from 'react-filepond'
 import { makeDeleteRequest, makeUploadRequest } from '../../cloudinary/cloudinaryHelper'
-import {useNotifications} from 'reapop'
+import NotificationsSystem, {wyboTheme, useNotifications} from 'reapop'
 // import { commands } from '@uiw/react-md-editor'
 
 const SimpleMdeReact = dynamic(
@@ -36,7 +36,7 @@ const SimpleMdeReact = dynamic(
 
 export default function Home() {
     const { token, user } = useToken()
-const {notify}= useNotifications()
+    const {notify,notifications,dismissNotification} = useNotifications()
 
     const defaultName = `
 Apple iPhone 13 PRO - 6GB RAM - 512GB - 5G - Graphite
@@ -218,7 +218,14 @@ const resetResponse=()=>{
                 </Head>
                 {/* nav header */}
                 <HeaderNavigation />
-
+                <NotificationsSystem
+                // 2. Pass the notifications you want Reapop to display.
+                notifications={notifications}
+                // 3. Pass the function used to dismiss a notification.
+                dismissNotification={(id) => dismissNotification(id)}
+                // 4. Pass a builtIn theme or a custom theme.
+                theme={wyboTheme}
+            />
                 <main className=' flex  flex-col   w-full'>
                     <section className='pt-12 max-h-screen flex'>
                         {loadingGetApi ?
