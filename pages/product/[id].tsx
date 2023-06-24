@@ -107,12 +107,13 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         console.log(data)
         // const json = formToJSON(formData)
         // Send a POST request to the API route
+        notify('Processing...','loading')
         const response = await axios.put('http://localhost:3001/api/products/'+router?.query?.id, data, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
-        notify('Processing...','loading')
+       
 
         if (response.status == 200) {
             // Form submitted successfully

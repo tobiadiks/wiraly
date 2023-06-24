@@ -29,12 +29,13 @@ export default function Home() {
         
         // const json = formToJSON(formData)
         // Send a DELETE request to the API route
+        notify('Processing...','loading')
         const response = await axios.delete(`https://brainy-puce-pigeon.cyclic.app/api/products/${id}`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
-        notify('Processing...','loading')
+        
 
         if (response.status >= 200 || response.status <= 300) {
             // Form submitted successfully
