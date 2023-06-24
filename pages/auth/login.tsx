@@ -31,7 +31,7 @@ export default function LogIn() {
         try {
             // Send a POST request to the API route
             const response = await axios.post('https://brainy-puce-pigeon.cyclic.app/api/auth/login', json,)
-
+            notify('Processing...','loading')
 
             if (response.status == 201) {
                 // Form submitted successfully

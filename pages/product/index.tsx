@@ -34,7 +34,7 @@ export default function Home() {
                 'Authorization': 'Bearer ' + token
             }
         })
-
+        notify('Processing...','loading')
 
         if (response.status >= 200 || response.status <= 300) {
             // Form submitted successfully
