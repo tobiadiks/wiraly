@@ -29,7 +29,7 @@ export default function Home() {
         
         // const json = formToJSON(formData)
         // Send a DELETE request to the API route
-        const response = await axios.delete('https://brainy-puce-pigeon.cyclic.app/api/products', {
+        const response = await axios.delete(`https://brainy-puce-pigeon.cyclic.app/api/products/${id}`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
