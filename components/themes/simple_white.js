@@ -10,7 +10,7 @@ const ReactMarkdown = dynamic(
 
 export default function SimpleWhiteTheme(props) {
     return (
-        <div className='w-full bg-gray-200 min-h-screen flex flex-col lg:p-14 p-8   '>
+        <div className='w-full bg-gray-50 min-h-screen flex flex-col lg:p-14 p-8   '>
             <div className='mx-auto w-full '>
                 <div className='md:text-5xl text-3xl text-center font-bold mb-4'>{props.product_name}</div>
                 
