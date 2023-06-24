@@ -13,6 +13,7 @@ setUpNotifications({
   defaultProps: {
       position: 'top-center',
       dismissible: true,
+      dismissAfter:5000
   } 
 })
 function MyApp({ Component, pageProps: {...pageProps } }) {
