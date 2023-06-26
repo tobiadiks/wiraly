@@ -1,133 +1,153 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBox, faCartShopping, faChartSimple, faCog, faDashboard, faFileInvoice, faPeopleGroup, } from '@fortawesome/free-solid-svg-icons'
 import Head from 'next/head'
-import Image from 'next/image'
-import { useState } from 'react'
 import PrimaryButton from '../../components/buttons/primary.button'
-import SecondaryButton from '../../components/buttons/secondary.button'
-import CollectionCard from '../../components/cards/collection.card'
 import ProductCard from '../../components/cards/product.card'
-import RecommendedActionCard from '../../components/cards/recommended-action.card'
-import ThemeCard from '../../components/cards/theme.card'
-import UploadImagesCard from '../../components/cards/uploadimages.card'
-import FooterNavigation from '../../components/navigations/footer.navigation'
 import HeaderNavigation from '../../components/navigations/header.navigations'
-import TextAreaWithTop from '../../components/textboxes/textareawithtop.textbox'
-import TextWithTop from '../../components/textboxes/textwithtop.textbox'
-import SimpleWhiteTheme from '../../components/themes/simple_white'
-import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import SideNavigation from '../../components/navigations/side.navigation'
-import OrderCard from '../../components/cards/order.card'
 import { useRouter } from 'next/router'
+
+import axios from 'axios'
+import { useEffect } from 'react'
+import useDataFetching from '../../hooks/useDataFetching'
+import useToken from '../../hooks/useToken'
+import BlankLoader from '../../components/loaders/blank'
 import MobileNavigation from '../../components/navigations/mobile.navigation'
 
-
+import DataTable from 'react-data-table-component';
+import NotificationsSystem, {wyboTheme, useNotifications} from 'reapop'
 export default function Home() {
+    const router = useRouter()
+    const { token } = useToken()
+    const {notify,notifications,dismissNotification} = useNotifications()
+    
+    const { loading, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/orders', {
+        headers: { 'Authorization': 'Bearer ' + token }
+    })
+    console.log(data)
+    const handleDelete = async (id) => {
+        
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const form = new FormData(e.target)
-        const formData = Object.fromEntries(form.entries())
-        console.log(formData)
-        // router.push('/home')
-    }
+        
+        // const json = formToJSON(formData)
+        // Send a DELETE request to the API route
+        notify('Processing...','loading')
+        const response = await axios.delete(`https://brainy-puce-pigeon.cyclic.app/api/orders/${id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        
 
-    const [productName, setProductName] = useState('Your Product Name')
-    const [productDescription, setProductDescription] = useState('Your Product Name')
-    const [productPrice, setProductPrice] = useState(100)
-    const [theme, setTheme] = useState('simplewhite')
-
-    const router= useRouter()
-    // Theme Handler
-    const currentTheme = () => {
-        switch (theme) {
-            case 'simplewhite':
-                return <SimpleWhiteTheme
-                    product_name={productName}
-                    product_description={productDescription}
-                    product_price={productPrice}
-                />;
-            case 'simpleyellow':
-                return <SimpleYellowTheme
-                    product_name={productName}
-                    product_description={productDescription}
-                    product_price={productPrice}
-                />
-
-
-            default:
-                <SimpleWhiteTheme
-                    product_name={productName}
-                    product_description={productDescription}
-                    product_price={productPrice}
-
-                />
-
+        if (response.status >= 200 || response.status <= 300) {
+            // Form submitted successfully
+            const data = await response.data;
+            console.log(data);
+            notify('Deleted','success')
+            await router.reload()
+            
+        } else {
+            // Form submission failed
+            console.error('Form submission failed');
+            notify('Something went wrong','error')
+            
         }
+        
+    };
+    const columns = [
+        {
 
-    }
+            cell: row => <div className='cursor-pointer' onClick={() => router.push(`/order/${row.id}`)}>{row.order_id}</div>,
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
+        },
+        {
+            name: 'Product',
+            selector: row => row.product.name,
+            sortable: true,
+        },
+        
+        {
+            name: 'Product',
+            selector: row => row.product.short_url,
+            cell: row => (
+                <a className=' visited:text-yellow-400 default:text-yellow-400' href={`https://seltra.vercel.app/buy?product=${row.product.short_url}`} target="_blank" rel="noopener noreferrer">
+                    https://seltra.vercel.app/buy?product={row.product.short_url}
+                </a>
+            ),
+        },
+        // {
 
-    // End of theme Handler
+        //     cell: (row) => <div className='text-red-500 cursor-pointer' onClick={()=>handleDelete(row.id)}>Delete</div>,
+        //     ignoreRowClick: true,
+        //     allowOverflow: true,
+        //     button: true,
+        // },
+    ];
+
+    const paginationComponentOptions = {
+        rowsPerPageText: 'Products per page',
+        rangeSeparatorText: 'of',
+        selectAllRowsItem: true,
+        selectAllRowsItemText: 'All',
+    };
+
+    
 
     return (
-        <div className='bg-white pb-0 min-h-screen'>
-            <Head>
-                <title>Seltra</title>
-                <meta name="" content="" />
-                <link rel="icon" href="" />
-            </Head>
-            {/* nav header */}
-            <HeaderNavigation />
+        <>
+            <div className='bg-white  min-h-screen'>
+                <Head>
+                    <title>Seltra</title>
+                    <meta name="" content="" />
+                    <link rel="icon" href="" />
+                </Head>
+                {/* nav header */}
+                <HeaderNavigation />
+                <NotificationsSystem
+                // 2. Pass the notifications you want Reapop to display.
+                notifications={notifications}
+                // 3. Pass the function used to dismiss a notification.
+                dismissNotification={(id) => dismissNotification(id)}
+                // 4. Pass a builtIn theme or a custom theme.
+                theme={wyboTheme}
+            />
+                <main className=' flex  flex-col   w-full'>
+                    <section className='mt-14 max-h-screen flex'>
+                        {/* SideNav*/}
+                        <SideNavigation />
+                        <MobileNavigation />
 
-            <main className=' flex  flex-col   w-full'>
-                <section className='mt-14 max-h-screen flex'>
-                    {/* SideNav*/}
-                    <SideNavigation />
-                    <MobileNavigation />
-                    {/* preview */}
+                        {/* preview */}
 
-                    <div className='lg:w-3/4 w-full p-4 bg-white min-h-screen h-screen relative  overflow-y-auto '>
-                        {/* products */}
+                        <div className='lg:w-3/4 w-full p-4 bg-white min-h-screen h-screen relative  overflow-y-auto '>
+                            {/* products */}
+                            {loading && !error ?
+                                <BlankLoader /> :
+                                <section>
+                                    <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Order</div><div></div></div>
+                                    
+                                    <div className='w-full  '>
+                                        {/* order card */}
+                                        <DataTable
+                                            columns={columns}
+                                            data={data || []}
+                                            responsive
+                                            striped
+                                            pagination
+                                            paginationComponentOptions={paginationComponentOptions}
+                                        />
 
-                        <section >
-                            <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Order</div><div></div></div>
-                            <div className='max-w-full overflow-x-auto px-2 py-2'>
-                            <div className='flex my-6 font-bold'><div className='font-bold'>Filter By</div>
-                                <select className='ml-6'>
-                                    <option  className='text-yellow-400'>All Order</option>
-                                    <option className='text-yellow-400'>New</option>
-                                    <option className='text-yellow-400'>In Progress</option>
-                                    <option className='text-yellow-400'>Delivered</option>
-                                    <option className='text-yellow-400'>Canceled</option>
-                                </select>
+                                    </div>
+                                </section>
+                            }
+                        </div>
 
-                                <select className='ml-6'>
-                                    <option className='text-yellow-400'>Date</option>
-                                    <option className='text-yellow-400'>Price</option>
-                                   
-                                </select>
-                            </div>
-                            <div className='grid md:grid-cols-5 grid-cols-4  p-2 gap-x-2'>
-                                <div className='mx-auto my-auto font-bold col-span-2'>Product Name</div>
-                                <div className='mx-auto my-auto font-bold '>Price</div>
-                                {/* <div className='mx-auto my-auto font-bold '>Phone</div> */}
-                                {/* <div className='mx-auto my-auto font-bold '>Destination</div> */}
-                                <div className='mx-auto my-auto font-bold hidden md:block'>Date</div>
-                                <div className='mx-auto my-auto font-bold '>Status</div>
-                            </div>
-                            <div className='w-full grid md:grid lg:grid lg:grid-cols-1 md:grid-cols-1 gap-y-6'>
-                                {/* order card */}
-                                <OrderCard id='09'/>
-                                <OrderCard id='099'/>
-                            </div>
-                            </div>
-                        </section>
 
-                    </div>
+                    </section>
+                </main>
 
-                </section>
-            </main>
-
-        </div>
+            </div>
+        </>
     )
 }
+

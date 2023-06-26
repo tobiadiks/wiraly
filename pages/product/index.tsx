@@ -134,13 +134,7 @@ export default function Home() {
                                 <BlankLoader /> :
                                 <section>
                                     <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Product</div><div><PrimaryButton type={'button'} onclick={() => router.push('/product/new')} full text='Add Product' /></div></div>
-                                    <div className='flex my-6 font-bold'><div className='font-bold'>Filter By</div>
-                                        <select className='ml-6'>
-                                            <option className='text-yellow-400'>All Product</option>
-                                            <option className='text-yellow-400'>Published</option>
-                                            <option className='text-yellow-400'>Archived</option>
-                                        </select>
-                                    </div>
+                                    
                                     <div className='w-full  '>
                                         {/* product card */}
                                         <DataTable

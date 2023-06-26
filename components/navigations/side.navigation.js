@@ -59,13 +59,13 @@ export default function SideNavigation(){
 
         </div> */}
 
-        <div onClick={()=> router.push('/setting')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('setting')? 'text-yellow-300':'text-black'} `}>
+        {/* <div onClick={()=> router.push('/setting')} className={`flex cursor-pointer w-fit ${currentRoute.split('/').includes('setting')? 'text-yellow-300':'text-black'} `}>
          <div className='h-4 w-4 mr-2'>
              <FontAwesomeIcon icon={faCog}/>
          </div>
          <div>Setting</div>
 
-        </div>
+        </div> */}
 
      </div>
     )
