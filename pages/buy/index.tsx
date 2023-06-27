@@ -20,7 +20,7 @@ import AuthGuard from '../../components/hoc/authGuard'
 import axios, { formToJSON } from 'axios'
 import useToken from '../../hooks/useToken'
 // import { commands } from '@uiw/react-md-editor'
-
+import CheckOut from '../../components/cards/checkout.card'
 const SimpleMdeReact = dynamic(
     () => import("react-simplemde-editor").then(mod => mod.default),
     { ssr: false }
@@ -150,7 +150,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                         {/* preview */}
                         <div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
                             {/* theme render */}
-
+<CheckOut/>
                             {currentTheme()}
 
 

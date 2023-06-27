@@ -166,7 +166,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                             <BlankLoader />
 
                             :
-                            <> <div className='lg:w-1/4 w-full  my-8 mx-auto w-0 p-4 bg-white max-h-screen h-fit static  overflow-y-auto border rounded-sm'>
+                            <> <div className='lg:w-1/4 w-full  my-8 mx-auto  p-4 bg-white max-h-screen h-fit static  overflow-y-auto border rounded-sm'>
                                 <div className=' text-3xl md:text-2xl'>Order <span className='font-bold'>1122AA</span></div>
                                 <div className=' text-xs md:text-sm'>Add some information for the order you want to edit</div>
                                 {/* form */}
