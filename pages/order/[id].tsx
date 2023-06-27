@@ -118,34 +118,9 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         setLoading(false)
     };
 
-    // Theme Handler
-    const currentTheme = () => {
-        switch (theme) {
-            case 'simplewhite':
-                return <SimpleWhiteTheme
-                    product_name={productName}
-                    product_description={productDescription}
-                    product_price={productPrice}
-                />;
-            case 'simpleyellow':
-                return <SimpleYellowTheme
-                    product_name={productName}
-                    product_description={productDescription}
-                    product_price={productPrice}
-                />
+    
 
-
-            default:
-                <SimpleWhiteTheme
-                    product_name={productName}
-                    product_description={productDescription}
-                    product_price={productPrice}
-
-                />
-
-        }
-
-    }
+    
 
     // End of theme Handler
 

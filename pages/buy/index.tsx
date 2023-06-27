@@ -1,26 +1,17 @@
+'use client'
+ 
+
 import Head from 'next/head'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-import PrimaryButton from '../../components/buttons/primary.button'
-import SecondaryButton from '../../components/buttons/secondary.button'
-import CollectionCard from '../../components/cards/collection.card'
-import ProductCard from '../../components/cards/product.card'
-import RecommendedActionCard from '../../components/cards/recommended-action.card'
-import ThemeCard from '../../components/cards/theme.card'
-import UploadImagesCard from '../../components/cards/uploadimages.card'
-import FooterNavigation from '../../components/navigations/footer.navigation'
-import HeaderNavigation from '../../components/navigations/header.navigations'
-import TextAreaWithTop from '../../components/textboxes/textareawithtop.textbox'
-import TextWithTop from '../../components/textboxes/textwithtop.textbox'
+import { useEffect, useState } from 'react'
 import SimpleWhiteTheme from '../../components/themes/simple_white'
 import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import dynamic from 'next/dynamic'
-import AuthGuard from '../../components/hoc/authGuard'
-import axios, { formToJSON } from 'axios'
+import axios from 'axios'
 import useToken from '../../hooks/useToken'
 // import { commands } from '@uiw/react-md-editor'
 import CheckOut from '../../components/cards/checkout.card'
+import useDataFetching from '../../hooks/useDataFetching'
 const SimpleMdeReact = dynamic(
     () => import("react-simplemde-editor").then(mod => mod.default),
     { ssr: false }
@@ -51,6 +42,9 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     `
 
     const router = useRouter()
+    const searchParams = new URLSearchParams(router.pathname);
+ 
+  const search = searchParams.get('product')
 
 
     const [productName, setProductName] = useState(defaultName)
@@ -58,7 +52,23 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     const [productPrice, setProductPrice] = useState(100)
     const [productTotal, setProductTotal] = useState(1)
     const [theme, setTheme] = useState('simplewhite')
+    const [image, setImage] = useState('')
     const [loading, setLoading] = useState(false)
+    const [open, setOpen]=useState(false)
+
+    const { loading: loadingGetApi, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products/search' + search , {
+    })
+
+    useEffect(()=>{
+        if(!loadingGetApi && !error){
+            setProductName(data?.name)
+            setProductDescription(data?.description)
+            setProductPrice(data?.price)
+            setProductTotal(data?.total)
+            setTheme(data?.theme) 
+            setImage(data?.images[0])
+          }
+    },[data, loadingGetApi, error])
 
     const handleSubmit = async (e) => {
         setLoading(true)
@@ -110,12 +120,16 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     product_name={productName}
                     product_description={productDescription}
                     product_price={productPrice}
+                    product_image={image}
+                    onclick={()=>setOpen(true)}
                 />;
             case 'simpleyellow':
                 return <SimpleYellowTheme
                     product_name={productName}
                     product_description={productDescription}
                     product_price={productPrice}
+                    product_image={image}
+                    onclick={()=>setOpen(true)}
                 />
 
 
@@ -124,7 +138,8 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     product_name={productName}
                     product_description={productDescription}
                     product_price={productPrice}
-
+                    product_image={image}
+                    onclick={()=>setOpen(true)}
                 />
 
         }
@@ -150,7 +165,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                         {/* preview */}
                         <div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
                             {/* theme render */}
-<CheckOut/>
+{open&&<CheckOut/>}
                             {currentTheme()}
 
 
