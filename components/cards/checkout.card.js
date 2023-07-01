@@ -36,7 +36,7 @@ export default function Checkout({ product_id,price, onclose }) {
         formData.append('last_name', lastName);
         formData.append('address', address);
         formData.append('email', email);
-        formData.append('phones', phone);
+        formData.append('phone', phone);
         formData.append('quantity', quantity)
 
         let data = Object.fromEntries(formData.entries())
