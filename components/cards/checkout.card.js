@@ -91,7 +91,7 @@ export default function Checkout({ product_id,price, onclose }) {
                             </div>
                             :
                             <> <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen h-screen  static  overflow-y-auto border shadow-sm'>
-                                <div className='w-full flex justify-between'><div className=' text-3xl md:text-2xl'>Place <span className='font-bold'>Order</span></div><div className=' text-lg md:text-base'>NGN <span className='font-bold'>{quantity * price}</span></div></div>
+                                <div className='w-full flex justify-between'><div className=' text-3xl md:text-2xl'>Place <span className='font-bold'>Order</span></div><div className=' text-lg md:text-base my-auto'>NGN <span className='font-bold'>{quantity * price}</span></div></div>
                                 <div className=' text-xs md:text-sm'>Add your correct information.</div>
                                 {/* form */}
                                 <form onSubmit={handleSubmit} className='mt-8 space-y-8 h-full '>
