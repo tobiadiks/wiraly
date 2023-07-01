@@ -118,7 +118,7 @@ export default function Checkout() {
                 theme={wyboTheme}
             />
                 <main className=' flex  flex-col   w-full p-4'>
-                    <section className=' max-h-screen flex'>
+                    <section className=' max-h-screen flex z-30'>
                         {false ?
                          <BlankLoader />
                             
