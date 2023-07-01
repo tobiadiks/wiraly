@@ -101,13 +101,7 @@ export default function Checkout() {
      
     return (
         <>
-            <div className='  fixed min-h-screen w-full'>
-                <Head>
-                    <title>Seltra: Buy</title>
-                    <meta name="" content="" />
-                    <link rel="icon" href="" />
-                </Head>
-                {/* nav header */}
+            <div className='  fixed min-h-screen w-full z-50'>
                 
                 <NotificationsSystem
                 // 2. Pass the notifications you want Reapop to display.
@@ -118,12 +112,12 @@ export default function Checkout() {
                 theme={wyboTheme}
             />
                 <main className=' flex  flex-col   w-full p-4'>
-                    <section className=' max-h-screen flex z-[9999]'>
+                    <section className=' max-h-screen flex '>
                         {false ?
                          <BlankLoader />
                             
                        :
-                       <> <div className='md:w-1/4 z-[9999] mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen  static  overflow-y-auto border shadow-sm'>
+                       <> <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen  static  overflow-y-auto border shadow-sm'>
                             <div className=' text-3xl md:text-2xl'>Place <span className='font-bold'>Order</span></div>
                             <div className=' text-xs md:text-sm'>Add your correct information.</div>
                             {/* form */}
