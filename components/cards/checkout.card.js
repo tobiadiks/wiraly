@@ -103,7 +103,7 @@ const[orderId,setOrderId]=useState('')
                                 {/* form */}
                                 <form onSubmit={handleSubmit} className='mt-8 space-y-8 h-full '>
                                     <TextWithTop value={firstName} onChange={(e) => setFirstName(e.target.value)} ring full name='first_name' text='Firstname' />
-                                    <TextAreaWithTop value={lastName} onChange={(e) => setLastName(e.target.value)} ring full name='last_name' text='Lastname' />
+                                    <TextWithTop value={lastName} onChange={(e) => setLastName(e.target.value)} ring full name='last_name' text='Lastname' />
                                     <TextWithTop type={'email'} value={email} onChange={(e) => setEmail(e.target.value)} ring full name='email' text={`Email`} />
                                     <TextWithTop type={'tel'} value={phone} onChange={(e) => setPhone(e.target.value)} ring full name='phone' text={`Phone`} />
                                     <TextWithTop value={address} onChange={(e) => setAddress(e.target.value)} min={100} ring full name='address' text={`Address`} />

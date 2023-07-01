@@ -23,11 +23,11 @@ const SimpleMdeReact = dynamic(
 
 
 export default function Home() {
-   
+
 
 
     const router = useRouter()
-   
+
 
 
     const [productName, setProductName] = useState("")
@@ -37,7 +37,7 @@ export default function Home() {
     const [image, setImage] = useState('')
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
-   
+
     const { loading: loadingGetApi, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products/search/' + router.query.product)
     useEffect(() => {
         if (!loadingGetApi && !error) {
@@ -49,41 +49,7 @@ export default function Home() {
         }
     }, [data, loadingGetApi, error])
     console.log(error)
-    const handleSubmit = async (e) => {
-        setLoading(true)
-        e.preventDefault();
 
-        const formData = new FormData();
-        formData.append('name', productName);
-        formData.append('description', productDescription);
-        formData.append('price', productPrice.toString());
-        formData.append('sold', Number(0).toString());
-        formData.append('images', '');
-        formData.append('theme', theme);
-
-        let data: any = Object.fromEntries(formData.entries())
-        data.images = []
-
-
-        console.log(data)
-        // const json = formToJSON(formData)
-        // Send a POST request to the API route
-        const response = await axios.post('http://localhost:3001/api/orders', data)
-
-
-        if (response.status == 201) {
-            // Form submitted successfully
-            const data = await response.data;
-            console.log(data);
-            setLoading(false)
-            await router.push('/product')
-        } else {
-            // Form submission failed
-            console.error('Form submission failed');
-            setLoading(false)
-        }
-        setLoading(false)
-    };
 
     // Theme Handler
     const currentTheme = () => {
@@ -135,18 +101,19 @@ export default function Home() {
                 <main className='w-full'>
                     <section className='pt-0 max-h-screen w-full'>
                         {loadingGetApi && !error ?
-                            <BlankLoader /> :
+                            <BlankLoader /> : <>
 
-{error?<ErrorLoader/>:
-<div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
-                                {/* theme render */}
-                                {open && <CheckOut onclose={()=>setOpen(false)} product_id={data?.id} />}
-                                {currentTheme()}
+                                {error ?
+                                    <ErrorLoader /> :
+                                    <div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
+                                        {/* theme render */}
+                                        {open && <CheckOut onclose={() => setOpen(false)} product_id={data?.id} />}
+                                        {currentTheme()}
 
 
-                            </div>
-}
-                            
+                                    </div>
+                                }</>
+
                         }
 
                     </section>
