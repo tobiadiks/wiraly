@@ -118,12 +118,12 @@ export default function Checkout() {
                 theme={wyboTheme}
             />
                 <main className=' flex  flex-col   w-full p-4'>
-                    <section className=' max-h-screen flex z-30'>
+                    <section className=' max-h-screen flex z-[9999]'>
                         {false ?
                          <BlankLoader />
                             
                        :
-                       <> <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen  static  overflow-y-auto border shadow-sm'>
+                       <> <div className='md:w-1/4 z-[9999] mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen  static  overflow-y-auto border shadow-sm'>
                             <div className=' text-3xl md:text-2xl'>Place <span className='font-bold'>Order</span></div>
                             <div className=' text-xs md:text-sm'>Add your correct information.</div>
                             {/* form */}
