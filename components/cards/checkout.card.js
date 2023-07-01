@@ -47,7 +47,7 @@ export default function Checkout({ product_id,price, onclose }) {
         // const json = formToJSON(formData)
         // Send a POST request to the API route
         notify('Processing...', 'loading')
-        const response = await axios.put('https://brainy-puce-pigeon.cyclic.app/api/orders', data)
+        const response = await axios.post('https://brainy-puce-pigeon.cyclic.app/api/orders', data)
 
 
         if (response.status == 200) {
