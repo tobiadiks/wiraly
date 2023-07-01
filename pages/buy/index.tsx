@@ -107,7 +107,7 @@ export default function Home() {
                                     <ErrorLoader /> :
                                     <div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
                                         {/* theme render */}
-                                        {open && <CheckOut onclose={() => setOpen(false)} product_id={data?.id} />}
+                                        {open && <CheckOut price={data?.price} onclose={() => setOpen(false)} product_id={data?.id} />}
                                         {currentTheme()}
 
 
