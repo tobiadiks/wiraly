@@ -19,7 +19,7 @@ import NotificationsSystem, { wyboTheme, useNotifications } from 'reapop'
 
 
 
-export default function Checkout({ product_id }) {
+export default function Checkout({ product_id, onclose }) {
     const { notify, notifications, dismissNotification } = useNotifications()
     const router = useRouter()
 
@@ -30,7 +30,7 @@ export default function Checkout({ product_id }) {
     const [phone, setPhone] = useState('')
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
-
+const[orderId,setOrderId]=useState('')
 
 
 
@@ -61,6 +61,7 @@ export default function Checkout({ product_id }) {
             // Form submitted successfully
             const data = await response.data;
             console.log(data);
+            setOrderId(data?.order_id)
             notify('Successful', 'success')
             setLoading(false)
             setSuccess(true)
@@ -90,9 +91,11 @@ export default function Checkout({ product_id }) {
                 />
                 <main className=' flex  flex-col   w-full p-4'>
                     <section className=' max-h-screen flex '>
-                        {false ?
-                            <BlankLoader />
-
+                        {success ?
+                            
+                            <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen h-screen  static  overflow-y-auto border shadow-sm'>
+                            <div className=' text-3xl md:text-2xl mx-auto my-auto'>Order <span className='font-bold'>{orderId}</span> was successful.</div>
+                            </div>
                             :
                             <> <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen h-screen  static  overflow-y-auto border shadow-sm'>
                                 <div className=' text-3xl md:text-2xl'>Place <span className='font-bold'>Order</span></div>
@@ -108,7 +111,7 @@ export default function Checkout({ product_id }) {
 
 
                                     <div className='grid grid-cols-2 gap-4 align-baseline'>
-                                        <SecondaryButton disabled={loading} onclick={() => router.push('/product')} type={'button'} full text='Cancel' />
+                                        <SecondaryButton disabled={loading} onclick={onclose} type={'button'} full text='Cancel' />
                                         <PrimaryButton type={'submit'} disabled={loading} full text={loading ? 'Loading' : 'Submit'} />
                                     </div>
                                 </form>
