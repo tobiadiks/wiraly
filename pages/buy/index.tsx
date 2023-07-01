@@ -1,5 +1,5 @@
 'use client'
- 
+
 
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -12,6 +12,7 @@ import useToken from '../../hooks/useToken'
 // import { commands } from '@uiw/react-md-editor'
 import CheckOut from '../../components/cards/checkout.card'
 import useDataFetching from '../../hooks/useDataFetching'
+import BlankLoader from '../../components/loaders/blank'
 const SimpleMdeReact = dynamic(
     () => import("react-simplemde-editor").then(mod => mod.default),
     { ssr: false }
@@ -21,55 +22,32 @@ const SimpleMdeReact = dynamic(
 
 
 export default function Home() {
-    const { token, user } = useToken()
-    
+   
 
-    const defaultName = `
-Apple iPhone 13 PRO - 6GB RAM - 512GB - 5G - Graphite
-`
-
-    const defaultDescription = `
-
-
-* Manufacturer - Apple
-* Operating System - iOS 15
-* Rear Camera - 12MP + 12MP + 12MP
-* Front Camera - 12MP
-* RAM - 6GB
-* Internal Memory - 512GB
-
-iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colourful, sharper and brighter 6.1-inch Super Retina XDR display with ProMotion for faster, more responsive feel. A15 Bionic chip, the world's fastest smartphone chip for lightning-fast performance. Durable design and a huge leap in battery life.
-    `
 
     const router = useRouter()
-    const searchParams = new URLSearchParams(router.pathname);
- 
-  const search = searchParams.get('product')
+   
 
 
-    const [productName, setProductName] = useState(defaultName)
-    const [productDescription, setProductDescription] = useState(defaultDescription)
-    const [productPrice, setProductPrice] = useState(100)
-    const [productTotal, setProductTotal] = useState(1)
-    const [theme, setTheme] = useState('simplewhite')
+    const [productName, setProductName] = useState("")
+    const [productDescription, setProductDescription] = useState("")
+    const [productPrice, setProductPrice] = useState(null)
+    const [theme, setTheme] = useState('')
     const [image, setImage] = useState('')
     const [loading, setLoading] = useState(false)
-    const [open, setOpen]=useState(false)
-
-    const { loading: loadingGetApi, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products/search' + search , {
-    })
-
-    useEffect(()=>{
-        if(!loadingGetApi && !error){
+    const [open, setOpen] = useState(false)
+   
+    const { loading: loadingGetApi, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products/' + router.query.product)
+    useEffect(() => {
+        if (!loadingGetApi && !error) {
             setProductName(data?.name)
             setProductDescription(data?.description)
             setProductPrice(data?.price)
-            setProductTotal(data?.total)
-            setTheme(data?.theme) 
+            setTheme(data?.theme)
             setImage(data?.images[0])
-          }
-    },[data, loadingGetApi, error])
-
+        }
+    }, [data, loadingGetApi, error])
+    console.log(error)
     const handleSubmit = async (e) => {
         setLoading(true)
         e.preventDefault();
@@ -78,24 +56,18 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
         formData.append('name', productName);
         formData.append('description', productDescription);
         formData.append('price', productPrice.toString());
-        formData.append('total', productTotal.toString());
         formData.append('sold', Number(0).toString());
         formData.append('images', '');
         formData.append('theme', theme);
-        formData.append('user', user?.id);
 
         let data: any = Object.fromEntries(formData.entries())
         data.images = []
-        
+
 
         console.log(data)
         // const json = formToJSON(formData)
         // Send a POST request to the API route
-        const response = await axios.post('http://localhost:3001/api/products', data, {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        })
+        const response = await axios.post('http://localhost:3001/api/orders', data)
 
 
         if (response.status == 201) {
@@ -121,7 +93,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     product_description={productDescription}
                     product_price={productPrice}
                     product_image={image}
-                    onclick={()=>setOpen(true)}
+                    onclick={() => setOpen(true)}
                 />;
             case 'simpleyellow':
                 return <SimpleYellowTheme
@@ -129,7 +101,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     product_description={productDescription}
                     product_price={productPrice}
                     product_image={image}
-                    onclick={()=>setOpen(true)}
+                    onclick={() => setOpen(true)}
                 />
 
 
@@ -139,7 +111,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
                     product_description={productDescription}
                     product_price={productPrice}
                     product_image={image}
-                    onclick={()=>setOpen(true)}
+                    onclick={() => setOpen(true)}
                 />
 
         }
@@ -161,15 +133,18 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
 
                 <main className='w-full'>
                     <section className='pt-0 max-h-screen w-full'>
-                        
-                        {/* preview */}
-                        <div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
-                            {/* theme render */}
-{open&&<CheckOut/>}
-                            {currentTheme()}
+                        {loadingGetApi && !error ?
+                            <BlankLoader /> :
 
 
-                        </div>
+                            <div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
+                                {/* theme render */}
+                                {open && <CheckOut />}
+                                {currentTheme()}
+
+
+                            </div>
+                        }
 
                     </section>
                 </main>
