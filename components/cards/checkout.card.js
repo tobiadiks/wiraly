@@ -83,7 +83,7 @@ export default function Checkout({ product_id,price, onclose }) {
                     theme={wyboTheme}
                 />
                 <main className=' flex  flex-col   w-full p-4'>
-                    <section className=' max-h-screen flex '>
+                    <section className=' flex '>
                         {success ?
 
                             <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen h-screen  static  overflow-y-auto border shadow-sm'>
