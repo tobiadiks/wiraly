@@ -79,7 +79,7 @@ try{
 
     return (
         <>
-            <div className='fixed min-h-screen w-full z-50'>
+            <div className='fixed max-h-screen w-full z-50'>
 
                 <NotificationsSystem
                     // 2. Pass the notifications you want Reapop to display.
