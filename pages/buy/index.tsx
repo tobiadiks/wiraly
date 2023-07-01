@@ -37,7 +37,7 @@ export default function Home() {
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
    
-    const { loading: loadingGetApi, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products/' + router.query.product)
+    const { loading: loadingGetApi, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products/search/' + router.query.product)
     useEffect(() => {
         if (!loadingGetApi && !error) {
             setProductName(data?.name)
