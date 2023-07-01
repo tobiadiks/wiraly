@@ -46,25 +46,32 @@ export default function Checkout({ product_id,price, onclose }) {
         console.log(data)
         // const json = formToJSON(formData)
         // Send a POST request to the API route
-        notify('Processing...', 'loading')
-        const response = await axios.post('https://brainy-puce-pigeon.cyclic.app/api/orders', data)
+        
 
-
-        if (response.status == 200) {
-            // Form submitted successfully
-            const data = await response.data;
-            console.log(data);
-            setOrderId(data?.order_id)
-            notify('Successful', 'success')
-            setLoading(false)
-            setSuccess(true)
-        } else {
-            // Form submission failed
-            console.error('Form submission failed');
-            notify('Failed', 'error')
-            setLoading(false)
-        }
+try{
+    notify('Processing...', 'loading')
+    const response = await axios.post('https://brainy-puce-pigeon.cyclic.app/api/orders', data)
+    if (response.status == 200) {
+        // Form submitted successfully
+        const data = await response.data;
+        console.log(data);
+        setOrderId(data?.order_id)
+        notify('Successful', 'success')
         setLoading(false)
+        setSuccess(true)
+    } else {
+        // Form submission failed
+        console.error('Form submission failed');
+        notify('Failed', 'error')
+        setLoading(false)
+    }
+}catch(e){
+    console.error('Something went wrong');
+    notify('Something went wrong', 'error')
+    setLoading(false)
+}
+        
+        
     };
 
 
