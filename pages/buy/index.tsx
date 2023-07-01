@@ -139,7 +139,7 @@ export default function Home() {
 
                             <div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
                                 {/* theme render */}
-                                {open && <CheckOut />}
+                                {open && <CheckOut product_id={data?.id} />}
                                 {currentTheme()}
 
 

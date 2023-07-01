@@ -19,7 +19,7 @@ import NotificationsSystem, { wyboTheme, useNotifications } from 'reapop'
 
 
 
-export default function Checkout() {
+export default function Checkout({ product_id }) {
     const { notify, notifications, dismissNotification } = useNotifications()
     const router = useRouter()
 
@@ -47,7 +47,7 @@ export default function Checkout() {
         formData.append('phones', phone);
 
         let data = Object.fromEntries(formData.entries())
-
+        data.product = product_id;
 
 
         console.log(data)
@@ -104,12 +104,12 @@ export default function Checkout() {
                                     <TextWithTop type={'email'} value={email} onChange={(e) => setEmail(e.target.value)} ring full name='email' text={`Email`} />
                                     <TextWithTop type={'tel'} value={phone} onChange={(e) => setPhone(e.target.value)} ring full name='phone' text={`Phone`} />
                                     <TextWithTop value={address} onChange={(e) => setAddress(e.target.value)} min={100} ring full name='address' text={`Address`} />
-                                    
+
 
 
                                     <div className='grid grid-cols-2 gap-4 align-baseline'>
                                         <SecondaryButton disabled={loading} onclick={() => router.push('/product')} type={'button'} full text='Cancel' />
-                                        <PrimaryButton disabled={loading} full text={loading ? 'Loading' : 'Publish'} />
+                                        <PrimaryButton type={'submit'} disabled={loading} full text={loading ? 'Loading' : 'Submit'} />
                                     </div>
                                 </form>
 
