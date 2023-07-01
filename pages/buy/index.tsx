@@ -13,6 +13,7 @@ import useToken from '../../hooks/useToken'
 import CheckOut from '../../components/cards/checkout.card'
 import useDataFetching from '../../hooks/useDataFetching'
 import BlankLoader from '../../components/loaders/blank'
+import ErrorLoader from '../../components/loaders/error'
 const SimpleMdeReact = dynamic(
     () => import("react-simplemde-editor").then(mod => mod.default),
     { ssr: false }
@@ -136,14 +137,16 @@ export default function Home() {
                         {loadingGetApi && !error ?
                             <BlankLoader /> :
 
-
-                            <div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
+{error?<ErrorLoader/>:
+<div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
                                 {/* theme render */}
                                 {open && <CheckOut onclose={()=>setOpen(false)} product_id={data?.id} />}
                                 {currentTheme()}
 
 
                             </div>
+}
+                            
                         }
 
                     </section>
