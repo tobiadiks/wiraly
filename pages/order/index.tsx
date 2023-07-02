@@ -61,6 +61,11 @@ export default function Home() {
             button: true,
         },
         {
+            name: 'Customer',
+            selector: row => `${row.first_name} ${row.last_name}`,
+            sortable: true,
+        },
+        {
             name: 'Product name',
             selector: row => row.product.name,
             sortable: true,
