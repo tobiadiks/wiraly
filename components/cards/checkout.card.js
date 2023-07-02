@@ -94,7 +94,7 @@ try{
                         {success ?
 
                             <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen h-screen  static  overflow-y-auto border shadow-sm'>
-                                <div className=' text-3xl md:text-2xl mx-auto my-auto'>Order <span className='font-bold'>Order</span> was created successfully.<p className='mt-4 text-sm'>Check your email for details.</p></div>
+                                <div className=' text-3xl md:text-2xl mx-auto my-auto'><span className='font-bold'>Order</span> was created successfully.<p className='mt-4 text-sm'>Check your email for details.</p></div>
                             </div>
                             :
                             <> <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen h-screen  static  overflow-y-auto border shadow-sm'>
