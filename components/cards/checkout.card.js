@@ -51,7 +51,7 @@ export default function Checkout({ product_id,price, onclose }) {
 try{
     notify('Processing...', 'loading')
     const response = await axios.post('https://brainy-puce-pigeon.cyclic.app/api/orders', data)
-    if (response.status == 200) {
+    if (response.status == 201) {
         // Form submitted successfully
         const data = await response.data;
         console.log(data);
@@ -94,7 +94,7 @@ try{
                         {success ?
 
                             <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen h-screen  static  overflow-y-auto border shadow-sm'>
-                                <div className=' text-3xl md:text-2xl mx-auto my-auto'>Order <span className='font-bold'>{orderId}</span> was successful.</div>
+                                <div className=' text-3xl md:text-2xl mx-auto my-auto'>Order <span className='font-bold'>Order</span> was created successfully.<p>Check your email for details.</p></div>
                             </div>
                             :
                             <> <div className='md:w-1/4 mx-auto my-auto block md:block w-full p-4 bg-white max-h-screen h-screen  static  overflow-y-auto border shadow-sm'>

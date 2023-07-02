@@ -64,6 +64,11 @@ export default function Home() {
             sortable: true,
         },
         {
+            name: 'Sold',
+            selector: row => row.sold,
+            sortable: true,
+        },
+        {
             name: 'Total',
             selector: row => row.total,
             sortable: true,
