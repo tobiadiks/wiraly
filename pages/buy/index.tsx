@@ -42,7 +42,7 @@ export default function Home() {
             setSold(data?.sold[0])
         }
     }, [data, loadingGetApi, error])
-    console.log(error)
+    console.log(error,data)
 
 
     // Theme Handler
@@ -76,6 +76,8 @@ export default function Home() {
                     product_description={productDescription}
                     product_price={productPrice}
                     product_image={image}
+                    product_total={total}
+                    product_sold={sold}
                     onclick={() => setOpen(true)}
                 />
 
