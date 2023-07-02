@@ -61,13 +61,13 @@ export default function Home() {
             button: true,
         },
         {
-            name: 'Product',
+            name: 'Product name',
             selector: row => row.product.name,
             sortable: true,
         },
         
         {
-            name: 'Product',
+            name: 'Link',
             selector: row => row.product.short_url,
             cell: row => (
                 <a className=' visited:text-yellow-400 default:text-yellow-400' href={`https://seltra.vercel.app/buy?product=${row.product.short_url}`} target="_blank" rel="noopener noreferrer">
