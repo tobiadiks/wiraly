@@ -38,8 +38,8 @@ export default function Home() {
             setProductPrice(data?.price)
             setTheme(data?.theme)
             setImage(data?.images[0])
-            setTotal(data?.total[0])
-            setSold(data?.sold[0])
+            setTotal(data?.total)
+            setSold(data?.sold)
         }
     }, [data, loadingGetApi, error])
     console.log(error,data)
