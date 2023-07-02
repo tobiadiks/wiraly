@@ -1,23 +1,12 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import PrimaryButton from '../../components/buttons/primary.button'
 import SecondaryButton from '../../components/buttons/secondary.button'
-import CollectionCard from '../../components/cards/collection.card'
-import ProductCard from '../../components/cards/product.card'
-import RecommendedActionCard from '../../components/cards/recommended-action.card'
-import ThemeCard from '../../components/cards/theme.card'
-import UploadImagesCard from '../../components/cards/uploadimages.card'
-import FooterNavigation from '../../components/navigations/footer.navigation'
 import HeaderNavigation from '../../components/navigations/header.navigations'
-import TextAreaWithTop from '../../components/textboxes/textareawithtop.textbox'
 import TextWithTop from '../../components/textboxes/textwithtop.textbox'
-import SimpleWhiteTheme from '../../components/themes/simple_white'
-import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import dynamic from 'next/dynamic'
-import AuthGuard from '../../components/hoc/authGuard'
-import axios, { formToJSON } from 'axios'
+import axios from 'axios'
 import useToken from '../../hooks/useToken'
 import useDataFetching from '../../hooks/useDataFetching'
 import BlankLoader from '../../components/loaders/blank'
@@ -64,7 +53,7 @@ iPhone 13 Pro comes with the biggest Pro cameras system upgrade ever. The colour
     const [theme, setTheme] = useState('simplewhite')
     const [loading, setLoading] = useState(false)
 
-    const { loading: loadingGetApi, data, error } = useDataFetching('http://localhost:3001/api/orders/' + router?.query?.id, {
+    const { loading: loadingGetApi, data, error } = useDataFetching(`https://brainy-puce-pigeon.cyclic.app/api/orders/`+ router.query.id, {
         headers: { 'Authorization': 'Bearer' + token }
     })
 
