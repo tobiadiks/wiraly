@@ -10,7 +10,7 @@ import NotificationsSystem, { wyboTheme, useNotifications } from 'reapop'
 
 
 
-export default function Checkout({ product_id,price, onclose }) {
+export default function Checkout({ product_id,price, onclose, max }) {
     const { notify, notifications, dismissNotification } = useNotifications()
     const router = useRouter()
 
@@ -102,7 +102,7 @@ try{
                                 <div className=' text-xs md:text-sm'>Add your correct information.</div>
                                 {/* form */}
                                 <form onSubmit={handleSubmit} className='mt-8 space-y-8 h-full '>
-                                    <TextWithTop required type={'number'} value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} ring full name='quantity' text={`Quantity`} />
+                                    <TextWithTop required type={'number'} min={1} max={max} value={Number(quantity)} onChange={(e) => setQuantity(Number(e.target.value))} ring full name='quantity' text={`Quantity`} />
                                     <TextWithTop required value={firstName} onChange={(e) => setFirstName(e.target.value)} ring full name='first_name' text='Firstname' />
                                     <TextWithTop required value={lastName} onChange={(e) => setLastName(e.target.value)} ring full name='last_name' text='Lastname' />
                                     <TextWithTop required type={'email'} value={email} onChange={(e) => setEmail(e.target.value)} ring full name='email' text={`Email`} />
