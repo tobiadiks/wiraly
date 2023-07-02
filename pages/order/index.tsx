@@ -76,7 +76,7 @@ export default function Home() {
             selector: row => row?.product?.short_url,
             cell: row => (
                 <a className=' visited:text-yellow-400 default:text-yellow-400' href={`https://seltra.vercel.app/buy?product=${row.product.short_url}`} target="_blank" rel="noopener noreferrer">
-                    https://seltra.vercel.app/buy?product={row.product.short_url}
+                    https://seltra.vercel.app/buy?product={row?.product?.short_url}
                 </a>
             ),
         },
