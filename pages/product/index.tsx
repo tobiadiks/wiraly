@@ -144,7 +144,7 @@ export default function Home() {
                                         {/* product card */}
                                         <DataTable
                                             columns={columns}
-                                            data={data || []}
+                                            data={data?.filter((v)=>v.isDeleted !==true) || []}
                                             responsive
                                             striped
                                             pagination

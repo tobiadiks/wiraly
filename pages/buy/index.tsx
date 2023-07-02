@@ -32,7 +32,7 @@ export default function Home() {
 
     const { loading: loadingGetApi, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/products/search/' + router.query.product)
     useEffect(() => {
-        if (!loadingGetApi && !error) {
+        if (!loadingGetApi && !error && !data?.isDeleted) {
             setProductName(data?.name)
             setProductDescription(data?.description)
             setProductPrice(data?.price)
@@ -103,7 +103,7 @@ export default function Home() {
                         {loadingGetApi && !error ?
                             <BlankLoader /> : <>
 
-                                {error ?
+                                {data?.isDeleted || error  ?
                                     <ErrorLoader /> :
                                     <div className=' w-full  bg-white min-h-screen h-screen  overflow-y-auto '>
                                         {/* theme render */}
