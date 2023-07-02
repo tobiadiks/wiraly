@@ -13,48 +13,48 @@ import BlankLoader from '../../components/loaders/blank'
 import MobileNavigation from '../../components/navigations/mobile.navigation'
 
 import DataTable from 'react-data-table-component';
-import NotificationsSystem, {wyboTheme, useNotifications} from 'reapop'
+import NotificationsSystem, { wyboTheme, useNotifications } from 'reapop'
 export default function Home() {
     const router = useRouter()
     const { token } = useToken()
-    const {notify,notifications,dismissNotification} = useNotifications()
-    
+    const { notify, notifications, dismissNotification } = useNotifications()
+
     const { loading, data, error } = useDataFetching('https://brainy-puce-pigeon.cyclic.app/api/orders', {
         headers: { 'Authorization': 'Bearer ' + token }
     })
     console.log(data)
     const handleDelete = async (id) => {
-        
 
-        
+
+
         // const json = formToJSON(formData)
         // Send a DELETE request to the API route
-        notify('Processing...','loading')
+        notify('Processing...', 'loading')
         const response = await axios.delete(`https://brainy-puce-pigeon.cyclic.app/api/orders/${id}`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
-        
+
 
         if (response.status >= 200 || response.status <= 300) {
             // Form submitted successfully
             const data = await response.data;
             console.log(data);
-            notify('Deleted','success')
+            notify('Deleted', 'success')
             await router.reload()
-            
+
         } else {
             // Form submission failed
             console.error('Form submission failed');
-            notify('Something went wrong','error')
-            
+            notify('Something went wrong', 'error')
+
         }
-        
+
     };
     const columns = [
         {
-name:"Order ID"
+            name: "Order ID",
             cell: row => <div className='cursor-pointer' onClick={() => router.push(`/order/${row.id}`)}>{row.order_id}</div>,
             ignoreRowClick: true,
             allowOverflow: true,
@@ -70,7 +70,7 @@ name:"Order ID"
             selector: row => row.product.name,
             sortable: true,
         },
-        
+
         {
             name: 'Link',
             selector: row => row.product.short_url,
@@ -96,7 +96,7 @@ name:"Order ID"
         selectAllRowsItemText: 'All',
     };
 
-    
+
 
     return (
         <>
@@ -109,13 +109,13 @@ name:"Order ID"
                 {/* nav header */}
                 <HeaderNavigation />
                 <NotificationsSystem
-                // 2. Pass the notifications you want Reapop to display.
-                notifications={notifications}
-                // 3. Pass the function used to dismiss a notification.
-                dismissNotification={(id) => dismissNotification(id)}
-                // 4. Pass a builtIn theme or a custom theme.
-                theme={wyboTheme}
-            />
+                    // 2. Pass the notifications you want Reapop to display.
+                    notifications={notifications}
+                    // 3. Pass the function used to dismiss a notification.
+                    dismissNotification={(id) => dismissNotification(id)}
+                    // 4. Pass a builtIn theme or a custom theme.
+                    theme={wyboTheme}
+                />
                 <main className=' flex  flex-col   w-full'>
                     <section className='mt-14 max-h-screen flex'>
                         {/* SideNav*/}
@@ -130,7 +130,7 @@ name:"Order ID"
                                 <BlankLoader /> :
                                 <section>
                                     <div className='flex my-6 justify-between font-bold'><div className='text-2xl font-bold'>Order</div><div></div></div>
-                                    
+
                                     <div className='w-full  '>
                                         {/* order card */}
                                         <DataTable
