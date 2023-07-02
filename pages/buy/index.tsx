@@ -7,24 +7,14 @@ import { useEffect, useState } from 'react'
 import SimpleWhiteTheme from '../../components/themes/simple_white'
 import SimpleYellowTheme from '../../components/themes/simple_yellow'
 import dynamic from 'next/dynamic'
-import axios from 'axios'
-import useToken from '../../hooks/useToken'
 // import { commands } from '@uiw/react-md-editor'
 import CheckOut from '../../components/cards/checkout.card'
 import useDataFetching from '../../hooks/useDataFetching'
 import BlankLoader from '../../components/loaders/blank'
 import ErrorLoader from '../../components/loaders/error'
-const SimpleMdeReact = dynamic(
-    () => import("react-simplemde-editor").then(mod => mod.default),
-    { ssr: false }
-);
-
-
 
 
 export default function Home() {
-
-
 
     const router = useRouter()
 
@@ -35,6 +25,8 @@ export default function Home() {
     const [productPrice, setProductPrice] = useState(null)
     const [theme, setTheme] = useState('')
     const [image, setImage] = useState('')
+    const [total, setTotal] = useState(null)
+    const [sold, setSold] = useState(null)
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
 
@@ -46,6 +38,8 @@ export default function Home() {
             setProductPrice(data?.price)
             setTheme(data?.theme)
             setImage(data?.images[0])
+            setTotal(data?.total[0])
+            setSold(data?.sold[0])
         }
     }, [data, loadingGetApi, error])
     console.log(error)
@@ -60,6 +54,8 @@ export default function Home() {
                     product_description={productDescription}
                     product_price={productPrice}
                     product_image={image}
+                    product_total={total}
+                    product_sold={sold}
                     onclick={() => setOpen(true)}
                 />;
             case 'simpleyellow':
@@ -68,6 +64,8 @@ export default function Home() {
                     product_description={productDescription}
                     product_price={productPrice}
                     product_image={image}
+                    product_total={total}
+                    product_sold={sold}
                     onclick={() => setOpen(true)}
                 />
 
