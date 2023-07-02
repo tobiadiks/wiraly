@@ -54,7 +54,7 @@ export default function Home() {
     };
     const columns = [
         {
-
+name:"Order ID"
             cell: row => <div className='cursor-pointer' onClick={() => router.push(`/order/${row.id}`)}>{row.order_id}</div>,
             ignoreRowClick: true,
             allowOverflow: true,
